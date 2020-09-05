@@ -1,0 +1,87 @@
+.card-header, .table-bold{
+    font-weight: bold;
+}
+
+.red-price{
+    color:red;
+    font-weight: bold;
+}
+
+table{
+    text-align: center;
+}
+
+.delete-icon, .show-icon{
+    width: 25px;
+    height: 25px;
+}
+
+.list-picture{
+    width: 190px;
+    height: 190px;
+    padding: 10%;
+    margin-top:5%;
+}
+
+.container-product{
+    width: 250px;
+    height: 300px;
+    margin: 0.5%;
+    -webkit-box-shadow: 6px 6px 21px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 6px 21px -8px rgba(0,0,0,0.75);
+    box-shadow: 6px 6px 21px -8px rgba(0,0,0,0.75);
+}
+
+.product-information{
+    padding: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #505C8C;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+.image-upadate, .image-information-update{
+    width: 50%;
+}
+
+.image-update{
+    float: right;
+}
+
+.image-information-update{
+    float: left;
+}
+
+.img-container{
+    height: 220px;
+}
+
+.show-image{
+    padding: 5%;
+    width: 200px; 
+    height: 200px;
+}
+
+.show-product-information{
+    margin: 5%; 
+    padding: 5%;
+}
+
+.update-btn{
+    margin-left: 5%;
+}
+
+.delete-btn{
+    margin-left: 6%;
+}
+
+.option-button{
+    margin-top: 5%
+}
+
+.form{
+    margin: 5%;
+}
