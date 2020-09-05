@@ -31,3 +31,13 @@ Route::get('/admin/product/show/{id}','Admin\AdminProductController@show')->name
 Route::get('/admin/product/delete/{id}','Admin\AdminProductController@delete')->name("admin.product.delete");
 Route::get('/admin/product/update_form/{id}','Admin\AdminProductController@update_form')->name("admin.product.update_form"); // post
 Route::post('/admin/product/update','Admin\AdminProductController@update')->name("admin.product.update");
+
+//Routes Categories
+Route::get('/category/list', 'CategoryController@list')->name("category.list");
+Route::get('/category/show/{id}','CategoryController@show')->name("category.show");
+Route::get('/category/delete/{id}','CategoryController@delete')->name("category.delete");
+Route::get('/category/create', 'CategoryController@create')->name("category.create");
+Route::post('/category/save', 'CategoryController@save')->name("category.save");
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
