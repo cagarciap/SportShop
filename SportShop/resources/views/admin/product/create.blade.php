@@ -1,8 +1,6 @@
-@extends('layouts.master')
+@extends('util.product.menu')
 
-@section("title", "Create Product")
-
-@section('content')
+@section('product_content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

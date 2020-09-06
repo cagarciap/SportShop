@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoryController extends Controller
 {
-    public function list()
+    /*public function list()
     {
         $data = []; //to be sent to the view
         $data["first_categories"] = Category::all()->slice(0)->take(2);
@@ -62,5 +62,5 @@ class CategoryController extends Controller
         return redirect('/category/list');
 
 }
-
+*/
 }

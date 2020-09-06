@@ -1,15 +1,13 @@
-@extends('layouts.master')
+@extends('util.product.menu')
 
-@section("title", $data["title"])
-
-@section('content')
+@section('product_content')
 <div class="container">
     @include('util.message')
     <div class="row justify-content-center">
         @foreach($data["products"] as $product)
             <div class="col-md-auto container-product"></div">
                 <div class="row justify-content-center img-container">
-                    <div class="col-12">
+                    <div class="col-12" align="center">
                         <img src="/img/{{ $product->getImage() }}" class="list-picture">
                     </div>
                 </div>

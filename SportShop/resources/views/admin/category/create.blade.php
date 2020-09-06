@@ -1,8 +1,6 @@
-@extends('layouts.master')
+@extends('util.category.menu')
 
-@section("title", $data["title"])
-
-@section('content')
+@section('category_content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -18,7 +16,7 @@
                 </ul>
                 @endif
 
-                <form method="POST" action="{{ route('category.save') }}">
+                <form method="POST" action="{{ route('admin.category.save') }}">
                     @csrf
                     <input type="text" placeholder="Enter Name" name="name" value="{{ old('name') }}" />
                     <input type="text" placeholder="Enter Description" name="description" value="{{ old('description') }}" />

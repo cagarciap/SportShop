@@ -69,17 +69,19 @@
                     <!-- Left Side Of Navbar -->
                     @if (!Auth::guest())
                     <ul class="navbar-nav mr-auto">
-                        <a class="navbar-brand" href="{{ route('admin.product.create') }}">Create Product</a>
+                        <a class="navbar-brand" href="{{ route('admin.product.menu') }}">Product Control</a>
                     </ul>
                     <ul class="navbar-nav mr-auto">
-                        <a class="navbar-brand" href="{{ route('admin.product.list') }}">List Products</a>
-                    </ul>
-
-                    <ul class="navbar-nav mr-auto">
-                        <a class="navbar-brand" href="{{ route('category.create') }}">Create Category</a>
+                        <a class="navbar-brand" href="{{ route('admin.category.menu') }}">Category Control</a>
                     </ul>
                     <ul class="navbar-nav mr-auto">
-                        <a class="navbar-brand" href="{{ route('category.list') }}">List Categories</a>
+                        <a class="navbar-brand" href="#">Routines Control</a>
+                    </ul>
+                    <ul class="navbar-nav mr-auto">
+                        <a class="navbar-brand" href="#">User Control</a>
+                    </ul>
+                    <ul class="navbar-nav mr-auto">
+                        <a class="navbar-brand" href="#">Sales Control</a>
                     </ul>
                     @endif
                         
@@ -100,9 +102,9 @@
 
 <!-- Scripts -->
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>-->
 
 
 <!--<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>

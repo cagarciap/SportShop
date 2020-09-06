@@ -26,7 +26,7 @@
                             <a class="btn btn-outline-success btn-block" href="{{ route('admin.product.update_form',['id'=> $data['product']->getId()]) }}">Update</a>
                         </div>
                         <div class="col-sm-5 delete-btn">
-                            <a class="btn btn-outline-danger btn-block" href="{{ route('admin.product.delete',['id'=> $data['product']->getId()]) }}">Delete</a>
+                            <a class="btn btn-outline-danger btn-block" href="{{ route('admin.product.delete',['id'=> $data['product']->getId()]) }}" onclick="return confirm('Are you sure to delete this product?')">Delete</a>
                         </div>
                     </div>
                 </div>

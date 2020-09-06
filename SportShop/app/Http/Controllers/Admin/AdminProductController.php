@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\File;
 
 
 class AdminProductController extends Controller
@@ -15,6 +16,10 @@ class AdminProductController extends Controller
         $data["title"] = "List of products";
         $data["products"] = Product::all();
         return view("admin.product.list")->with("data",$data);
+    }
+
+    public function menu(){
+        return view('util.product.menu');
     }
 
     public function create(){
@@ -78,14 +83,17 @@ class AdminProductController extends Controller
         $product->setQuantity($request->input('quantity'));
         $product->setPrice($request->input('price'));
         $product->setSize($request->input('size'));
+        $old_image_name = $request->input('image_name');
 
         if($request->hasFile('image')){
             $file = $request->file('image');
             $nameImage = time().$file->getClientOriginalName();
             $file->move(public_path().'/img/',$nameImage);
             $product->setImage($nameImage);
+            $old_name=public_path().'/img/'.$old_image_name;
+            File::delete($old_name);
         }else{
-            $product->setImage($request->input('image_name'));
+            $product->setImage($old_image_name);
         }
         
         $product->save();
