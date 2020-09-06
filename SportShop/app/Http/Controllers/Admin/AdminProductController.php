@@ -11,36 +11,31 @@ use Illuminate\Support\Facades\File;
 
 class AdminProductController extends Controller
 {
-    public function list(){
+    public function list()
+    {
         $data = [];
         $data["title"] = "List of products";
         $data["products"] = Product::all();
         return view("admin.product.list")->with("data",$data);
     }
 
-    public function menu(){
+    public function menu()
+    {
         return view('util.product.menu');
     }
 
-    public function create(){
+    public function create()
+    {
         return view('admin.product.create');
     }
 
     public function save(Request $request){
-        /*$request->validate([
-            "name" => "required",
-            "description" => "required",
-            "quantity" => "required|numeric",
-            "price" => "required|numeric|gt:0",
-            "size" => "",
-            "image" => "required"
-        ]);*/
-
         if($request->hasFile('image')){
             $file = $request->file('image');
             $nameImage = time().$file->getClientOriginalName();
             $file->move(public_path().'/img/',$nameImage);
         }
+        Product::validate($request);
         $product = new Product();
         $product->setName($request->input('name'));
         $product->setDescription($request->input('description'));
@@ -52,7 +47,8 @@ class AdminProductController extends Controller
         return back()->with('success','Item created successfully!');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         try{
             $product = Product::findOrFail($id);
         }catch(ModelNotFoundException $e){
@@ -64,7 +60,8 @@ class AdminProductController extends Controller
         return view('admin.product.show')->with("data",$data);
     }
 
-    public function update_form($id){
+    public function update_form($id)
+    {
         try{
             $product = Product::findOrFail($id);
         }catch(ModelNotFoundException $e){
@@ -76,7 +73,8 @@ class AdminProductController extends Controller
         return view('admin.product.update')->with("data",$data);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $product = Product::find($request->input('id'));
         $product->setName($request->input('name'));
         $product->setDescription($request->input('description'));
@@ -100,7 +98,8 @@ class AdminProductController extends Controller
         return redirect()->route('admin.product.list');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         try{
             $product = Product::findOrFail($id);
         }catch(ModelNotFoundException $e){

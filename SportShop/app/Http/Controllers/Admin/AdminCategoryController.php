@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AdminCategoryController extends Controller
 {
 
-    public function menu(){
+    public function menu()
+    {
         return view('util.category.menu');
     }
 
@@ -22,7 +23,8 @@ class AdminCategoryController extends Controller
         return view('admin.category.list')->with("data",$data);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         try{
             $category = Category::findOrFail($id);
         }catch(ModelNotFoundException $e){
@@ -40,20 +42,17 @@ class AdminCategoryController extends Controller
         return view('admin.category.create')->with("data",$data);
     }
 
-    public function save(Request $request){
-        /*$request->validate([
-            "name" => "required",
-            "description" => "required"
-
-        ]);*/
-
+    public function save(Request $request)
+    {
+        Category::validate($request);
         Category::create($request->only(["name","description"]));
         return back()->with('success','Item created successfully!');
     }
 
  
     
-    public function delete($id){
+    public function delete($id)
+    {
         try{
             $category = Category::findOrFail($id);
         }catch(ModelNotFoundException $e){
@@ -62,5 +61,5 @@ class AdminCategoryController extends Controller
         $category->delete();
         return redirect('/admin/category/list');
 
-}
+    }
 }
