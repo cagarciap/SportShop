@@ -1,8 +1,6 @@
-@extends('layouts.master')
+@extends('admin.product.menu')
 
-@section("title", "Product: ".$data["title"])
-
-@section('content')
+@section('product_content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -39,31 +37,43 @@
                                 <input type="text" class="form-control" placeholder="{{ $data['product']->getPrice() }}" name="price" value="{{ $data['product']->getPrice() }}" />
                             </div>
                         </div>
-                        <div class="form-row image-information-update">
-                            <div class="form-group col-md-12">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
                                 <label>Product Size</label>
                                 <input type="text" class="form-control" placeholder="{{ $data['product']->getSize() }}" name="size" value="{{ $data['product']->getSize() }}" />
                             </div>
+                            <div class="form-group col-md-6">
+                                <label>Product Category</label>
+                                <select class="form-control" name="category">
+                                    @foreach($data["categories"] as $category)
+                                        <option value="{{ $category->getId() }}">{{ $category->getName() }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row justify-content-center">
+                            <div align="center">
+                                <label>Preview Image</label></br>
+                                <img src="/img/{{ $data['product']->getImage() }}" class="list-picture">
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label>Product Image</label></br>
+                                <label>New Product Image</label></br>
                                 <input type="file" name="image" id="image_file" value="{{ old('image') }}" />
                             </div>
                             <div class="form-group col-md-12">
                                 <input type="hidden" id="image_file_name" class="form-control" placeholder="{{ $data['product']->getImage() }}" name="image_name" value="{{ $data['product']->getImage() }}" />
                             </div>
                         </div>
-                        <div class="form-row image-update">
-                            <div class="form-group col-md-12 " align="center">
-                                <label>Image</label></br>
-                                <img src="/img/{{ $data['product']->getImage() }}" class="list-picture">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <button type="submit" class="btn btn-outline-success btn-block">Update Product</button>
                             </div>
-                        </div> 
-                        <div class="option-button">
-                            <button type="submit" class="btn btn-outline-success btn-block">Update Product</button>
+                            <div class="form-group col-md-6">
+                                <a class="btn btn-outline-danger btn-block" href="{{ route('admin.product.delete',['id'=> $data['product']->getId()]) }}" onclick="return confirm('Are you sure to delete this product?')">Delete Product</a>
+                            </div>
                         </div>
-                        <div class="option-button">
-                            <a class="btn btn-outline-danger btn-block" href="{{ route('admin.product.delete',['id'=> $data['product']->getId()]) }}" onclick="return confirm('Are you sure to delete this product?')">Delete Product</a>
-                        </div>    
                     </form>
                 </div>
             </div>

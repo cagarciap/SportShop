@@ -1,4 +1,4 @@
-@extends('util.category.menu')
+@extends('admin.category.menu')
 
 @section('category_content')
 <div class="container">

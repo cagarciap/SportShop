@@ -42,19 +42,6 @@ table{
     text-transform: uppercase;
 }
 
-
-.image-upadate, .image-information-update{
-    width: 50%;
-}
-
-.image-update{
-    float: right;
-}
-
-.image-information-update{
-    float: left;
-}
-
 .img-container{
     height: 220px;
 }
@@ -76,10 +63,6 @@ table{
 
 .delete-btn{
     margin-left: 6%;
-}
-
-.option-button{
-    margin-top: 5%
 }
 
 .form{

@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use App\Category;
 
 class Product extends Model
 {
-    //attributes id, name, price, created_at, updated_at
-    protected $fillable = ['name','description','quantity','price', 'size', 'image'];
+    protected $fillable = ['name','description','quantity','price', 'size', 'image', 'category_id'];
+    //protected $fillable = ['name','description','quantity','price', 'size', 'image'];
 
     public static function validate(Request $request){
         $request->validate([
@@ -17,7 +18,7 @@ class Product extends Model
             "quantity" => "required|numeric",
             "price" => "required|numeric|gt:0",
             "size" => "",
-            "image" => "required"
+            "category" => "required"
         ]);
     }
 
@@ -91,4 +92,17 @@ class Product extends Model
         $this->attributes['image'] = $image;
     }
 
+    public function getCategoryId()
+    {
+        return $this->attributes['category_id'];
+    }
+
+    public function setCategoryId($category_id)
+    {
+        $this->attributes['category_id'] = $category_id;
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

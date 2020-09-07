@@ -1,4 +1,4 @@
-@extends('util.product.menu')
+@extends('admin.product.menu')
 
 @section('product_content')
 <div class="container">
@@ -46,10 +46,10 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Product Category</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <select class="form-control" name="category">
+                                    @foreach($data["categories"] as $category)
+                                        <option value="{{ $category->getId() }}">{{ $category->getName() }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

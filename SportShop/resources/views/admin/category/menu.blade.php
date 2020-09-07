@@ -1,17 +1,16 @@
 @extends('layouts.master')
 
-@section("title", "Product Menu")
+@section("title", "Category Menu")
 
 @section('content')
 <div class="d-flex" id="wrapper">
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">
-            Product Control
+            Category Control
         </div>
         <div class="list-group list-group-flush">
-            <a href="{{ route('admin.product.create') }}" class="list-group-item list-group-item-action bg-light">Create Prodcut</a>
-            <a href="{{ route('admin.product.list') }}" class="list-group-item list-group-item-action bg-light">Product List</a>
-            <a href="#" class="list-group-item list-group-item-action bg-light">Search Product</a>
+            <a href="{{ route('admin.category.create') }}" class="list-group-item list-group-item-action bg-light">Create Category</a>
+            <a href="{{ route('admin.category.list') }}" class="list-group-item list-group-item-action bg-light">Category List</a>
         </div>
     </div>
     <div id="page-content-wrapper">
@@ -20,7 +19,7 @@
         </nav>
 
         <main class="container-fluid">
-            @yield('product_content')
+            @yield('category_content')
         </main>
     </div>
   </div>

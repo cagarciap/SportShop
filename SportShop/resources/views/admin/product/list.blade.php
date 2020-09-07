@@ -1,4 +1,4 @@
-@extends('util.product.menu')
+@extends('admin.product.menu')
 
 @section('product_content')
 <div class="container">

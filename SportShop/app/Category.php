@@ -48,4 +48,9 @@ class Category extends Model
         $this->attributes['description'] = $description;
     }
 
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
+
 }

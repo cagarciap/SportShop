@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
@@ -26,7 +27,9 @@ class AdminProductController extends Controller
 
     public function create()
     {
-        return view('admin.product.create');
+        $data = [];
+        $data["categories"] = Category::all();
+        return view('admin.product.create')->with("data",$data);
     }
 
     public function save(Request $request){
@@ -43,6 +46,7 @@ class AdminProductController extends Controller
         $product->setPrice($request->input('price'));
         $product->setSize($request->input('size'));
         $product->setImage($nameImage);
+        $product->setCategoryId($request->input('category'));
         $product->save();
         return back()->with('success','Item created successfully!');
     }
@@ -67,9 +71,11 @@ class AdminProductController extends Controller
         }catch(ModelNotFoundException $e){
             return redirect()->route('home.index');
         }
+        $categories = Category::all();
         $data = [];
         $data["title"] = $product->getName();
         $data["product"] = $product;
+        $data["categories"] = $categories;
         return view('admin.product.update')->with("data",$data);
     }
 
