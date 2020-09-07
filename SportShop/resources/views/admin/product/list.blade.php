@@ -7,7 +7,7 @@
         @foreach($data["products"] as $product)
             <div class="col-md-auto container-product"></div">
                 <div class="row justify-content-center img-container">
-                    <div class="col-12">
+                    <div class="col-12" align="center">
                         <img src="/img/{{ $product->getImage() }}" class="list-picture">
                     </div>
                 </div>
