@@ -12,23 +12,36 @@ use Illuminate\Support\Facades\File;
 
 class AdminProductController extends Controller
 {
+    protected $routes = [];
+
+    public function __construct()
+    {
+        $this->routes = [
+            ["route" => "admin.product.create", "title" => "Create Product"],
+            ["route" => "admin.product.list", "title" => "List Product"]
+        ];
+    }
+
     public function list()
     {
         $data = [];
         $data["title"] = "List of products";
         $data["products"] = Product::all();
+        $data["routes"] = $this->routes;
         return view("admin.product.list")->with("data",$data);
     }
 
     public function menu()
     {
-        return view('util.product.menu');
+        $data["routes"] = $this->routes;
+        return view('admin.menu')->with("data",$data);
     }
 
     public function create()
     {
         $data = [];
         $data["categories"] = Category::all();
+        $data["routes"] = $this->routes;
         return view('admin.product.create')->with("data",$data);
     }
 
@@ -61,6 +74,7 @@ class AdminProductController extends Controller
         $data = [];
         $data["title"] = "Product Information";
         $data["product"] = $product;
+        $data["routes"] = $this->routes;
         return view('admin.product.show')->with("data",$data);
     }
 
@@ -76,6 +90,7 @@ class AdminProductController extends Controller
         $data["title"] = $product->getName();
         $data["product"] = $product;
         $data["categories"] = $categories;
+        $data["routes"] = $this->routes;
         return view('admin.product.update')->with("data",$data);
     }
 
@@ -115,3 +130,9 @@ class AdminProductController extends Controller
         return redirect()->route('admin.product.list');
     }
 }
+
+
+    //public static $routes = [["route" => "admin.product.create", "title" => "Create Product"],["route" => "admin.product.list", "title" => "List Product"]];
+    //const ROUTES = [["route" => "admin.product.create", "title" => "Create Product"],["route" => "admin.product.list", "title" => "List Product"]];
+    //$routes[0] = ["route" => "admin.product.create", "title" => "Create Product"];
+    //$routes[1] = ["route" => "admin.product.list", "title" => "List Product"];

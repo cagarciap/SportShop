@@ -1,6 +1,6 @@
-@extends('admin.category.menu')
+@extends('admin.menu')
 
-@section('category_content')
+@section('menu_content')
 <div class="container">
    <div class="row justify-content-center">
       <div class="col-md-8">

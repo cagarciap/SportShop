@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreateSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('name');
-            $table->text('description');
-            $table->integer('quantity');
-            $table->double('price',10,4);
-            $table->text('size')->nullable();
-            $table->text('image');
-            $table->bigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->date('date');
+            $table->double('total_to_pay',10,4);
+            $table->text('user_id');
+            //$table->foreign('product_id')->references('id')->on('products');
+            //$table->bigInteger('sale_id')->unsigned();
+            //$table->foreign('sale_id')->references('id')->on('sales');
             $table->timestamps();
         });
     }

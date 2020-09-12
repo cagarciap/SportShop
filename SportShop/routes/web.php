@@ -17,8 +17,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Routes cart
+
 Route::get('/home','HomeController@index')->name("home.index");
-Route::get('/product/list', 'ProductController@list')->name("product.list");
+Route::get('/client/list', 'ProductController@list')->name("client.list");
+Route::get('/client/cart/{id}', 'ProductController@add_cart')->name("client.add_cart");
+Route::get('/client/show/{id}/{status?}', 'ProductController@show')->name("client.show");
+Route::get('/client/show_cart', 'ProductController@show_cart')->name("client.show_cart");
+Route::get('/client/delete/{id}', 'ProductController@delete')->name("client.delete");
+Route::post('/client/quantity/{id}', 'ProductController@modify_quantity')->name("client.quantity");
+Route::get('/client/buy', 'ProductController@buy')->name("client.confirm");
+
+
+
+// Routes Admin - Sales
+Route::get('/admin/sale/menu', 'Admin\AdminSaleController@menu')->name("admin.sale.menu");
+Route::get('/admin/sale/list', 'Admin\AdminSaleController@list')->name("admin.sale.list");
+Route::get('/admin/sale/show/{id}', 'Admin\AdminSaleController@show')->name("admin.sale.show");
+Route::post('/admin/sale/query1', 'Admin\AdminSaleController@query1')->name("admin.sale.query1");
 
 
 

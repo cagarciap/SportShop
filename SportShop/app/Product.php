@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Item;
 
 class Product extends Model
 {
@@ -104,5 +105,9 @@ class Product extends Model
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function items(){
+        return $this->hasMany(Item::class);
     }
 }

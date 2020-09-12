@@ -81,7 +81,7 @@
                         <a class="navbar-brand" href="#">User Control</a>
                     </ul>
                     <ul class="navbar-nav mr-auto">
-                        <a class="navbar-brand" href="#">Sales Control</a>
+                        <a class="navbar-brand" href="{{ route('admin.sale.menu') }}">Sales Control</a>
                     </ul>
                     @endif
                         

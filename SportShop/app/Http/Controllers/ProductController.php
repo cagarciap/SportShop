@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Product;
+use App\Item;
+use App\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -13,20 +15,100 @@ class ProductController extends Controller
         $data = [];
         $data["title"] = "List of products";
         $data["products"] = Product::all();
-        return view("product.list")->with("data",$data);
-
+        return view("client.list")->with("data",$data);
     }
 
-
-    public function show($id)
+    public function add_cart($id)
     {
+        $cart = session()->get("products");
+        if ($cart == null){
+            $cart[$id] = 1;
+        }elseif(!array_key_exists($id,$cart)){
+            $cart[$id] = 1;
+        }else{
+            $cart[$id] = $cart[$id]+1;
+        }
+        session()->put("products",$cart);
+        return redirect()->route('client.list');
+        //return $this->list();
+    }
+
+    public function show_cart()
+    {
+        $data = [];
+        $cart = session()->get("products");
+        //dd($cart);
+        if ($cart != null){
+            $products_id = array_keys($cart);
+            $products = Product::whereIn('id',$products_id)->get();
+            foreach ($products as $product) {
+                $product->setQuantity($cart[$product->getId()]);
+            }
+            $data["products"] = $products;
+            return view("client.show_cart")->with("data",$data);
+        }
+    }
+
+    public function show($id,$status=False){
         try{
             $product = Product::findOrFail($id);
         }catch(ModelNotFoundException $e){
             return redirect()->route('home.index');
         }
         $data = [];
+        $data["title"] = "Product Information";
         $data["product"] = $product;
-        return view('product.show')->with("data",$data);
+        if ($status==True){
+            $data["status"] = True;
+        }else{
+            $data["status"] = False;
+        }
+        return view('client.show')->with("data",$data);
     }
+
+    public function delete($id){
+        $cart = session()->get("products");
+        unset($cart[$id]);
+        session()->put("products",$cart);
+        return redirect()->route('client.show_cart');
+        //return $this->show_cart();
+    }
+
+    public function modify_quantity(Request $request,$id){
+        $cart = session()->get("products");
+        $cart[$id] = $request->input('quantity');
+        session()->put("products",$cart);
+        return redirect()->route('client.show_cart');
+        //return $this->show_cart();
+    }
+
+    public function buy(){
+        $sale = new Sale();
+        $sale->setDate(date('Y-m-d'));
+        $sale->setTotal_to_pay(0);
+        $sale->setUserId("cesar");
+        $sale->save();
+        $total = 0;
+        $cart = session()->get("products");
+        $products_id = array_keys($cart);
+        for ($i = 0; $i < count($products_id); $i++){
+            $item = new Item();
+            $quantity = $cart[$products_id[$i]];
+            $item->setQuantity($quantity);
+            $product = Product::find($products_id[$i]);
+            $price = $product->getPrice();
+            //$product->setQuantity($product->getQuantity()-$quantity());
+            $totalProduct = $price*$quantity;
+            $total = $total+$totalProduct;
+            $item->setTotal($totalProduct);
+            $item->setProductId($products_id[$i]);
+            $item->setSaleId($sale->getId());
+            $item->save();
+        }
+        $sale->setTotal_to_pay($total);
+        $sale->save();  
+        return redirect()->route('client.list');
+        //return $this->list(); 
+    }
+
 }
