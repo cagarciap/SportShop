@@ -75,7 +75,14 @@
                         <a class="navbar-brand" href="{{ route('admin.category.menu') }}">Category Control</a>
                     </ul>
                     <ul class="navbar-nav mr-auto">
-                        <a class="navbar-brand" href="#">Routines Control</a>
+                        <a class="navbar-brand" href="{{ route('admin.routine.menu') }}">Admin Routines Control</a>
+                    </ul>
+<<<<<<< Updated upstream
+                     <ul class="navbar-nav mr-auto">
+=======
+                    <ul class="navbar-nav mr-auto">
+>>>>>>> Stashed changes
+                        <a class="navbar-brand" href="{{ route('user.routine.menu') }}">User Routines Control</a>
                     </ul>
                     <ul class="navbar-nav mr-auto">
                         <a class="navbar-brand" href="#">User Control</a>

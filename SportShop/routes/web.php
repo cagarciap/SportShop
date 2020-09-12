@@ -60,6 +60,26 @@ Route::get('/admin/category/delete/{id}','Admin\AdminCategoryController@delete')
 Route::get('/admin/category/create', 'Admin\AdminCategoryController@create')->name("admin.category.create");
 Route::post('/admin/category/save', 'Admin\AdminCategoryController@save')->name("admin.category.save");
 
+//Routes Routines
+
+Route::get('/admin/routine', 'Admin\AdminRoutineController@menu')->name("admin.routine.menu");
+Route::get('/admin/routine/create', 'Admin\AdminRoutineController@create')->name("admin.routine.create");
+Route::get('/admin/routine/list', 'Admin\AdminRoutineController@list')->name("admin.routine.list");
+Route::post('/admin/routine/save', 'Admin\AdminRoutineController@save')->name("admin.routine.save");
+Route::get('/admin/routine/show/{id}', 'Admin\AdminRoutineController@show')->name("admin.routine.show");
+Route::get('/admin/routine/delete/{id}', 'Admin\AdminRoutineController@delete')->name("admin.routine.delete");
+
+
+Route::get('/user/routine', 'RoutineController@menu')->name("user.routine.menu");
+Route::get('/user/routine/recommend', 'RoutineController@recommend')->name("user.routine.recommend");
+Route::post('/user/routine/calculate', 'RoutineController@calculate')->name("user.routine.calculate");
+Route::get('/user/routine/list', 'RoutineController@list')->name("user.routine.list");
+Route::get('/user/routine/show/{id}', 'RoutineController@show')->name("user.routine.show");
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 
 
 // AUTH

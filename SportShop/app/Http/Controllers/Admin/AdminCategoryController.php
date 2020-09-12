@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AdminCategoryController extends Controller
 {
     protected $routes = [];
+    protected $nameMenu = "Category Controller";
 
     public function __construct()
     {
@@ -21,9 +22,14 @@ class AdminCategoryController extends Controller
 
     public function menu()
     {
+<<<<<<< Updated upstream
         $data = [];
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.menu')->with("data",$data);
+=======
+        return view('util.admin.category.menu');
+>>>>>>> Stashed changes
     }
 
     public function list()
@@ -32,6 +38,7 @@ class AdminCategoryController extends Controller
         $data["title"] = "List of categories";
         $data["categories"] = Category::all();
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.category.list')->with("data",$data);
     }
 
@@ -45,6 +52,7 @@ class AdminCategoryController extends Controller
         $data = [];
         $data["category"] = $category;
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.category.show')->with("data",$data);
     }
 
@@ -53,6 +61,7 @@ class AdminCategoryController extends Controller
         $data = [];
         $data["title"] = "Create Category";
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.category.create')->with("data",$data);
     }
 
