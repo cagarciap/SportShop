@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\File;
 class AdminProductController extends Controller
 {
     protected $routes = [];
+    protected $nameMenu = "Product Controller";
 
     public function __construct()
     {
@@ -28,13 +29,19 @@ class AdminProductController extends Controller
         $data["title"] = "List of products";
         $data["products"] = Product::all();
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view("admin.product.list")->with("data",$data);
     }
 
     public function menu()
     {
+<<<<<<< Updated upstream
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.menu')->with("data",$data);
+=======
+        return view('util.admin.product.menu');
+>>>>>>> Stashed changes
     }
 
     public function create()
@@ -42,6 +49,7 @@ class AdminProductController extends Controller
         $data = [];
         $data["categories"] = Category::all();
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.product.create')->with("data",$data);
     }
 
@@ -75,6 +83,7 @@ class AdminProductController extends Controller
         $data["title"] = "Product Information";
         $data["product"] = $product;
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.product.show')->with("data",$data);
     }
 
@@ -91,6 +100,7 @@ class AdminProductController extends Controller
         $data["product"] = $product;
         $data["categories"] = $categories;
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.product.update')->with("data",$data);
     }
 
@@ -131,8 +141,3 @@ class AdminProductController extends Controller
     }
 }
 
-
-    //public static $routes = [["route" => "admin.product.create", "title" => "Create Product"],["route" => "admin.product.list", "title" => "List Product"]];
-    //const ROUTES = [["route" => "admin.product.create", "title" => "Create Product"],["route" => "admin.product.list", "title" => "List Product"]];
-    //$routes[0] = ["route" => "admin.product.create", "title" => "Create Product"];
-    //$routes[1] = ["route" => "admin.product.list", "title" => "List Product"];

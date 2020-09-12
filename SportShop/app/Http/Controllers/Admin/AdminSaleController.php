@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\File;
 class AdminSaleController extends Controller
 {
     protected $routes = [];
+    protected $nameMenu = "Sales Controller";
 
     public function __construct()
     {
         $this->routes = [
             ["route" => "admin.sale.list", "title" => "Sales List"],
-            //["route" => "admin.sale.statistics", "title" => "Sales Statistics"]
         ];
     }
 
@@ -27,14 +27,15 @@ class AdminSaleController extends Controller
     {
         $data = [];
         $data["title"] = "Sales List";
-        //$data["sales"] = Sale::all();
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view("admin.sale.dateForm")->with("data",$data);
     }
 
     public function menu()
     {
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view('admin.menu')->with("data",$data);
     }
 
@@ -47,9 +48,9 @@ class AdminSaleController extends Controller
         $data = [];
         $data["title"] = "Sales List";
         $sales = Sale::all()->where('date','>=',$startDate)->where('date','<=',$endDate);
-        //dd($sales);
         $data["sales"] = $sales;
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         return view("admin.sale.list")->with("data",$data);
     }
 
@@ -57,9 +58,9 @@ class AdminSaleController extends Controller
     {
         $data = [];
         $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
         $items = Item::all()->whereIn('sale_id',$id);
         $data["items"] = $items;
-        //dd($items);
         return view('admin.sale.show')->with("data",$data);
     }
 }
