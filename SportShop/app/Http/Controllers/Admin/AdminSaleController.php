@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -9,7 +9,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Auth;
 
 class AdminSaleController extends Controller
 {
@@ -21,6 +21,14 @@ class AdminSaleController extends Controller
         $this->routes = [
             ["route" => "admin.sale.list", "title" => "Sales List"],
         ];
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if(Auth::user()->getRole()=="client"){
+                return redirect()->route('home.index');
+            }
+
+            return $next($request);
+        });
     }
 
     public function list()

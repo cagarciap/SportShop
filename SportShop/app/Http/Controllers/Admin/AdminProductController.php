@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -8,6 +8,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminProductController extends Controller
@@ -21,6 +22,14 @@ class AdminProductController extends Controller
             ["route" => "admin.product.create", "title" => "Create Product"],
             ["route" => "admin.product.list", "title" => "List Product"]
         ];
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if(Auth::user()->getRole()=="client"){
+                return redirect()->route('home.index');
+            }
+
+            return $next($request);
+        });
     }
 
     public function list()
@@ -35,13 +44,9 @@ class AdminProductController extends Controller
 
     public function menu()
     {
-<<<<<<< Updated upstream
         $data["routes"] = $this->routes;
         $data["nameMenu"] = $this->nameMenu;
         return view('admin.menu')->with("data",$data);
-=======
-        return view('util.admin.product.menu');
->>>>>>> Stashed changes
     }
 
     public function create()
@@ -124,7 +129,7 @@ class AdminProductController extends Controller
         }else{
             $product->setImage($old_image_name);
         }
-        
+
         $product->save();
         return redirect()->route('admin.product.list');
     }
