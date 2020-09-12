@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
-// Routes cart
+Route::get('/admin/index', 'Admin\AdminHomeController@index')->name("admin.home.index");
 
+
+// Routes cart
 Route::get('/home','HomeController@index')->name("home.index");
 Route::get('/client/list', 'ProductController@list')->name("client.list");
 Route::get('/client/cart/{id}', 'ProductController@add_cart')->name("client.add_cart");
@@ -35,8 +37,6 @@ Route::get('/admin/sale/menu', 'Admin\AdminSaleController@menu')->name("admin.sa
 Route::get('/admin/sale/list', 'Admin\AdminSaleController@list')->name("admin.sale.list");
 Route::get('/admin/sale/show/{id}', 'Admin\AdminSaleController@show')->name("admin.sale.show");
 Route::post('/admin/sale/query1', 'Admin\AdminSaleController@query1')->name("admin.sale.query1");
-
-
 
 
 // Routes admin - product
@@ -75,14 +75,8 @@ Route::get('/user/routine/recommend', 'RoutineController@recommend')->name("user
 Route::post('/user/routine/calculate', 'RoutineController@calculate')->name("user.routine.calculate");
 Route::get('/user/routine/list', 'RoutineController@list')->name("user.routine.list");
 Route::get('/user/routine/show/{id}', 'RoutineController@show')->name("user.routine.show");
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 
 
 // AUTH
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');

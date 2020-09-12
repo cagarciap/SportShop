@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class AdminCategoryController extends Controller
 {
@@ -18,23 +19,27 @@ class AdminCategoryController extends Controller
             ["route" => "admin.category.create", "title" => "Create Category"],
             ["route" => "admin.category.list", "title" => "Category List"]
         ];
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if(Auth::user()->getRole()=="client"){
+                return redirect()->route('home.index');
+            }
+
+            return $next($request);
+        });
     }
 
     public function menu()
     {
-<<<<<<< Updated upstream
         $data = [];
         $data["routes"] = $this->routes;
         $data["nameMenu"] = $this->nameMenu;
         return view('admin.menu')->with("data",$data);
-=======
-        return view('util.admin.category.menu');
->>>>>>> Stashed changes
     }
 
     public function list()
     {
-        $data = []; 
+        $data = [];
         $data["title"] = "List of categories";
         $data["categories"] = Category::all();
         $data["routes"] = $this->routes;
@@ -71,9 +76,6 @@ class AdminCategoryController extends Controller
         Category::create($request->only(["name","description"]));
         return back()->with('success','Item created successfully!');
     }
-
- 
-    
     public function delete($id)
     {
         try{
