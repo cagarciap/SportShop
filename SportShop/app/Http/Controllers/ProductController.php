@@ -1,11 +1,13 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 use App\Product;
 use App\Item;
 use App\Sale;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -84,7 +86,7 @@ class ProductController extends Controller
         $sale = new Sale();
         $sale->setDate(date('Y-m-d'));
         $sale->setTotal_to_pay(0);
-        $sale->setUserId("cesar");
+        $sale->setUserId(Auth::user()->getId());
         $sale->save();
         $total = 0;
         $cart = session()->get("products");
@@ -99,7 +101,7 @@ class ProductController extends Controller
                 $rejectedProducts[$product->getId()] = $productQuantity;
             }else{
                 $item = new Item();
-                $item->setQuantity($quantity); 
+                $item->setQuantity($quantity);
                 $totalProduct = $price*$quantity;
                 $total = $total+$totalProduct;
                 $item->setTotal($totalProduct);
@@ -109,7 +111,7 @@ class ProductController extends Controller
                 $product->setQuantity($productQuantity-$quantity);
                 $product->save();
             }
-            
+
         }
         if ($validar == True){
             for($i = 0; $i < count($products_id); $i++){
@@ -119,18 +121,34 @@ class ProductController extends Controller
             }
             session()->put("products",$cart);
             $sale->delete();
-            return redirect()->route('client.show_cart'); 
+            return redirect()->route('client.show_cart');
         }else{
-            $sale->setTotal_to_pay($total);
+            $descuento = (5*$total)/100;
+            if(Auth::user()->getCredit() > 20){
+                $sale->setTotal_to_pay($total - $descuento);
+                Auth::user()->setCredit(Auth::user()->getCredit()-20);
+            }else{
+                $sale->setTotal_to_pay($total);
+            }
             $sale->save();
+
             /*$mess = session()->get("success");
             $mess = "Your purchase was successful";
             session()->put("success",$mess);
             $mess = session()->get("success");*/
             $cart = session()->forget('products');
-            return redirect()->route('client.list'); 
+
+            if($total > 1000){
+                Auth::user()->setCredit((Auth::user()->getCredit())+5);
+            }
+            Auth::user()->save();
+            return redirect()->route('client.list');
+            //return $this->list();
         }
     }
 
-
 }
+
+
+
+

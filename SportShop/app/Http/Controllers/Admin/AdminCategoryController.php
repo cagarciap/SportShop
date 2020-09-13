@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Category;
+
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Null_;
 
 class AdminCategoryController extends Controller
 {
@@ -17,7 +19,7 @@ class AdminCategoryController extends Controller
     {
         $this->routes = [
             ["route" => "admin.category.create", "title" => "Create Category"],
-            ["route" => "admin.category.list", "title" => "Category List"]
+            ["route" => "admin.category.list", "title" => "Category List"],
         ];
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
@@ -39,9 +41,10 @@ class AdminCategoryController extends Controller
 
     public function list()
     {
+        $category = Category::all();
         $data = [];
         $data["title"] = "List of categories";
-        $data["categories"] = Category::all();
+        $data["categories"] = $category;
         $data["routes"] = $this->routes;
         $data["nameMenu"] = $this->nameMenu;
         return view('admin.category.list')->with("data",$data);
@@ -76,6 +79,31 @@ class AdminCategoryController extends Controller
         Category::create($request->only(["name","description"]));
         return back()->with('success','Item created successfully!');
     }
+
+    public function update_form($id)
+    {
+        try{
+            $category = Category::findOrFail($id);
+        }catch(ModelNotFoundException $e){
+            return redirect()->route('home.index');
+        }
+        $data = [];
+        $data["title"] = $category->getName();
+        $data["category"] = $category;
+        $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
+        return view('admin.category.update')->with("data",$data);
+    }
+
+    public function update(Request $request)
+    {
+        $category = Category::find($request->input('id'));
+        $category->setName($request->input('name'));
+        $category->setDescription($request->input('description'));
+        $category->save();
+        return redirect()->route('admin.category.list');
+    }
+
     public function delete($id)
     {
         try{

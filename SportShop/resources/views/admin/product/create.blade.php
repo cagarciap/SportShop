@@ -66,7 +66,6 @@
                                         <button type="submit" class="btn btn-outline-success btn-block">Add Product</button>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>

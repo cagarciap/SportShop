@@ -18,9 +18,21 @@
 
                 <form method="POST" action="{{ route('admin.category.save') }}">
                     @csrf
-                    <input type="text" placeholder="Enter Name" name="name" value="{{ old('name') }}" />
-                    <input type="text" placeholder="Enter Description" name="description" value="{{ old('description') }}" />
-                    <input type="submit" value="Send" />
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Category Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Name" name="name" value="{{ old('name') }}" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Category Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Description" name="description" value="{{ old('description') }}" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-outline-success btn-block">Add Category</button>
+                        </div>
+                    </div>
                 </form>
 
                 </div>

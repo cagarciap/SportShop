@@ -17,9 +17,9 @@ class CreateItemsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('quantity');
             $table->double('total',10,4);
-            $table->bigInteger('product_id')->unsigned();
+            $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->bigInteger('sale_id')->unsigned();
+            $table->unsignedBigInteger('sale_id');
             $table->foreign('sale_id')->references('id')->on('sales');
             $table->timestamps();
         });
