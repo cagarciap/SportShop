@@ -5,7 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Product Information</div>
+                <div class="card-header">
+                    Product Information
+                    <a class="btn btn-outline-info return-btn" href="{{ route('admin.product.show',['id' => $data['product']->getId()]) }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                </div>
                 <div class="card-body">
                     @if($errors->any())
                     <ul id="errors">

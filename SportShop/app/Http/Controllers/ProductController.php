@@ -79,8 +79,8 @@ class ProductController extends Controller
     }
 
     public function buy(){
-        //$rejectedProducts = [];
-        //$data = [];
+        $rejectedProducts = [];
+        $validar = False;
         $sale = new Sale();
         $sale->setDate(date('Y-m-d'));
         $sale->setTotal_to_pay(0);
@@ -95,8 +95,8 @@ class ProductController extends Controller
             $price = $product->getPrice();
             $productQuantity = $product->getQuantity();
             if ($quantity > $productQuantity){
-                break;
-                //array_push($rejectedProducts,$product->getId());
+                $validar = True;
+                $rejectedProducts[$product->getId()] = $productQuantity;
             }else{
                 $item = new Item();
                 $item->setQuantity($quantity); 
@@ -111,18 +111,26 @@ class ProductController extends Controller
             }
             
         }
-        $sale->setTotal_to_pay($total);
-        $sale->save();
-
-        if (count($rejectedProducts) != 0){
+        if ($validar == True){
+            for($i = 0; $i < count($products_id); $i++){
+                if (array_key_exists($products_id[$i],$rejectedProducts)){
+                    $cart[$products_id[$i]] = $rejectedProducts[$products_id[$i]];
+                }
+            }
+            session()->put("products",$cart);
+            $sale->delete();
+            return redirect()->route('client.show_cart'); 
+        }else{
+            $sale->setTotal_to_pay($total);
+            $sale->save();
+            /*$mess = session()->get("success");
+            $mess = "Your purchase was successful";
+            session()->put("success",$mess);
+            $mess = session()->get("success");*/
+            $cart = session()->forget('products');
+            return redirect()->route('client.list'); 
         }
-
-        /*$mess = session()->get("success");
-        $mess = "Your purchase was successful";
-        session()->put("success",$mess);
-        $mess = session()->get("success");*/
-        $cart = session()->forget('products');
-        return redirect()->route('client.list');
     }
+
 
 }

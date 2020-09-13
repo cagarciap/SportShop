@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
     <a href="{{ route('client.show_cart') }}" class="btn btn-outline-success cart-btn">Ver carrito</a><br><br>
-    @include('util.message')
     <div class="row justify-content-center">
         @foreach($data["products"] as $product)
             <div class="col-md-auto container-product"></div">

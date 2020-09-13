@@ -123,8 +123,7 @@ class AdminProductController extends Controller
             $nameImage = time().$file->getClientOriginalName();
             $file->move(public_path().'/img/',$nameImage);
             $product->setImage($nameImage);
-            $old_name=public_path().'/img/'.$old_image_name;
-            File::delete($old_name);
+            unlink(public_path()."/img/".$old_image_name);
         }else{
             $product->setImage($old_image_name);
         }
