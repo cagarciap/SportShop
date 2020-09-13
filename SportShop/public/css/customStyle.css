@@ -32,14 +32,18 @@ table{
     box-shadow: 6px 6px 21px -8px rgba(0,0,0,0.75);
 }
 
-.product-information{
-    padding: 0%;
+.product-information, .product-information-2{
+    padding: 1%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #505C8C;
-    color: white;
+    color: black;
     text-transform: uppercase;
+}
+
+.product-information{
+    background: #3d1177;
+    color: white;
 }
 
 .img-container{
@@ -122,4 +126,17 @@ table{
 
 .return-btn{
     float: right;
+}
+
+.cart-btn{
+    float: left; 
+    margin-top: 0%;
+    background: #3d1177;
+    color: white;
+    border: solid 2px #3d1177;
+}
+
+.add-btn{
+    border-radius: 50%;
+    font-size: 18px;
 }

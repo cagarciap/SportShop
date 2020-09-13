@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     Shopping Cart 
-                    <a class="btn btn-outline-primary return-btn" href="{{ route('client.list') }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                    <a class="btn btn-outline-info return-btn" href="{{ route('client.list') }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
@@ -32,7 +32,7 @@
                                                     <input type="number" class="form-control" name="quantity" min="0" value="{{ $product->getQuantity() }}" style="width: 80px;">
                                                 </div>
                                                 <div class="form-group col-md-6">
-                                                    <button type="submit" class="btn btn-outline-success"><img src="/icons/plus-circle.svg"></button>
+                                                    <button type="submit" class="btn btn-outline-success add-btn"><b>+</b></button>
                                                 </div>
                                             </div>
                                         </form>
@@ -43,11 +43,11 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="form-row">
+                    <div class="form-row">
                     <div class="form-group col-md-12">
                         <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.confirm') }}"><img src="/icons/cart-check.svg" class="delete-icon"></a>
                     </div>
+                </div>
                 </div>
                 
             </div>

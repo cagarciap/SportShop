@@ -30,14 +30,12 @@ class ProductController extends Controller
         }
         session()->put("products",$cart);
         return redirect()->route('client.list');
-        //return $this->list();
     }
 
     public function show_cart()
     {
         $data = [];
         $cart = session()->get("products");
-        //dd($cart);
         if ($cart != null){
             $products_id = array_keys($cart);
             $products = Product::whereIn('id',$products_id)->get();
@@ -71,7 +69,6 @@ class ProductController extends Controller
         unset($cart[$id]);
         session()->put("products",$cart);
         return redirect()->route('client.show_cart');
-        //return $this->show_cart();
     }
 
     public function modify_quantity(Request $request,$id){
@@ -79,10 +76,11 @@ class ProductController extends Controller
         $cart[$id] = $request->input('quantity');
         session()->put("products",$cart);
         return redirect()->route('client.show_cart');
-        //return $this->show_cart();
     }
 
     public function buy(){
+        //$rejectedProducts = [];
+        //$data = [];
         $sale = new Sale();
         $sale->setDate(date('Y-m-d'));
         $sale->setTotal_to_pay(0);
@@ -92,23 +90,39 @@ class ProductController extends Controller
         $cart = session()->get("products");
         $products_id = array_keys($cart);
         for ($i = 0; $i < count($products_id); $i++){
-            $item = new Item();
             $quantity = $cart[$products_id[$i]];
-            $item->setQuantity($quantity);
             $product = Product::find($products_id[$i]);
             $price = $product->getPrice();
-            //$product->setQuantity($product->getQuantity()-$quantity());
-            $totalProduct = $price*$quantity;
-            $total = $total+$totalProduct;
-            $item->setTotal($totalProduct);
-            $item->setProductId($products_id[$i]);
-            $item->setSaleId($sale->getId());
-            $item->save();
+            $productQuantity = $product->getQuantity();
+            if ($quantity > $productQuantity){
+                break;
+                //array_push($rejectedProducts,$product->getId());
+            }else{
+                $item = new Item();
+                $item->setQuantity($quantity); 
+                $totalProduct = $price*$quantity;
+                $total = $total+$totalProduct;
+                $item->setTotal($totalProduct);
+                $item->setProductId($products_id[$i]);
+                $item->setSaleId($sale->getId());
+                $item->save();
+                $product->setQuantity($productQuantity-$quantity);
+                $product->save();
+            }
+            
         }
         $sale->setTotal_to_pay($total);
-        $sale->save();  
+        $sale->save();
+
+        if (count($rejectedProducts) != 0){
+        }
+
+        /*$mess = session()->get("success");
+        $mess = "Your purchase was successful";
+        session()->put("success",$mess);
+        $mess = session()->get("success");*/
+        $cart = session()->forget('products');
         return redirect()->route('client.list');
-        //return $this->list(); 
     }
 
 }

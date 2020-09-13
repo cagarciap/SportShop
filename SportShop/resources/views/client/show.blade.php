@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     Product Information
-                    <a class="btn btn-outline-primary return-btn" href="{{ url()->previous() }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                    <a class="btn btn-outline-info return-btn" href="{{ url()->previous() }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -17,6 +17,7 @@
                             <b>Product Quantity:</b> {{ $data["product"]->getQuantity() }}<br/> 
                             <b>Product Price:</b> {{ $data["product"]->getPrice() }}<br/> 
                             <b>Product Size:</b> {{ $data["product"]->getSize() }}<br/>
+                            <b>Product Category:</b> {{ $data["product"]->category->getName() }}<br/>
                         </div>
                         <div class="col-sm-4 show-product-information">
                             <img src="/img/{{ $data['product']->getImage() }}" class="show-image">

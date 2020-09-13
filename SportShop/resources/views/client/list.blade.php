@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <a href="{{ route('client.show_cart') }}" class="btn btn-outline-success cart-btn">Ver carrito</a><br><br>
     @include('util.message')
     <div class="row justify-content-center">
         @foreach($data["products"] as $product)
@@ -16,19 +17,19 @@
 
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-4 product-information">
+                    <div class="col-4 product-information-2">
                         <b>{{ $product->getPrice() }}$</b>
                     </div>
-                    <div class="col-4 product-information">
-                        <a class="navbar-brand btn btn-outline-success btn-block" style="margin: 5%" href="{{ route('client.add_cart',['id'=> $product->getId()]) }}"><img src="/icons/cart-plus.svg" class="delete-icon"></a>
+                    <div class="col-4 product-information-2">
+                        <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.add_cart',['id'=> $product->getId()]) }}"><img src="/icons/cart-plus.svg" class="delete-icon"></a>
                     </div>
-                    <div class="col-4 product-information">
-                        <a class="navbar-brand btn btn-outline-success btn-block" style="margin: 5%" href="{{ route('client.show',['id'=> $product->getId(),'status'=>True]) }}"><img src="/icons/eye.svg" class="delete-icon"></a>
+                    <div class="col-4 product-information-2">
+                        <a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('client.show',['id'=> $product->getId(),'status'=>True]) }}"><img src="/icons/file-earmark-text.svg" class="delete-icon"></a>
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
-    <a href="{{ route('client.show_cart') }}">Ver carrito</a>
+    
 </div>
 @endsection

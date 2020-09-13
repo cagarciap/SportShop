@@ -7,7 +7,6 @@ use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -141,6 +140,8 @@ class AdminProductController extends Controller
         }catch(ModelNotFoundException $e){
             return redirect()->route('home.index');
         }
+        $nameImage = $product->getImage();
+        unlink(public_path()."/img/".$nameImage);
         $product->delete();
         return redirect()->route('admin.product.list');
     }
