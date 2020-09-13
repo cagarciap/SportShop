@@ -59,6 +59,8 @@ Route::get('/admin/category/show/{id}','Admin\AdminCategoryController@show')->na
 Route::get('/admin/category/delete/{id}','Admin\AdminCategoryController@delete')->name("admin.category.delete");
 Route::get('/admin/category/create', 'Admin\AdminCategoryController@create')->name("admin.category.create");
 Route::post('/admin/category/save', 'Admin\AdminCategoryController@save')->name("admin.category.save");
+Route::get('/admin/category/update_form/{id}','Admin\AdminCategoryController@update_form')->name("admin.category.update_form"); // post
+Route::post('/admin/category/update','Admin\AdminCategoryController@update')->name("admin.category.update");
 
 //Routes Routines
 

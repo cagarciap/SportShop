@@ -7,12 +7,21 @@
             <div class="card">
                 <div class="card-header">{{ $data["category"]->getName() }} Detail</div>
 
-                <div class="card-body"> 
+                <div class="card-body">
                     <b>Category:</b> {{ $data["category"]->getName() }}<br />
                     <b>Description:</b> {{ $data["category"]->getDescription() }}<br />
+                    <br>
+                    <br>
                     <div class="option-button">
-                        <a class="btn btn-outline-danger btn-block" href="{{ route('admin.category.delete',['id'=> $data['category']->getId()]) }}" onclick="return confirm('Are you sure to delete this category?')">Delete Category</a>
-                    </div> 
+                        <div class = "row">
+                            <div class="col-sm-5 update-btn">
+                                <a class="btn btn-outline-success btn-block" href="{{ route('admin.category.update_form',['id'=> $data['category']->getId()]) }}">Update</a>
+                            </div>
+                            <div class="col-sm-5 update-btn">
+                                <a class="btn btn-outline-danger btn-block" href="{{ route('admin.category.delete',['id'=> $data['category']->getId()]) }}" onclick="return confirm('Are you sure to delete this category?')">Delete Category</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
