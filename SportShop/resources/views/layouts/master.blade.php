@@ -37,45 +37,47 @@
                                 </li>
                             @endif
                         @else
-                            <button type="button" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#exampleModal">
-                                Credits : {{Auth::user()->getCredit()}}
-                            </button>
-                            <!-- Modal -->
+                            @if(!(Auth::user()->getRole() == 'admin'))
+                                <button type="button" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#exampleModal">
+                                    Credits : {{Auth::user()->getCredit()}}
+                                </button>
+                                <!-- Modal -->
 
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content">
-                                    @if (Auth::user()->getCredit() >= 20)
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        @if (Auth::user()->getCredit() >= 20)
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Congratulations!! You have so much credits.</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            Congratulations {{Auth::user()->getName()}}, You have {{Auth::user()->getCredit()}} credits to redeem in SportShop.
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        @else
                                         <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Congratulations!! You have so much credits.</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>
-                                        <div class="modal-body">
-                                        Congratulations {{Auth::user()->getName()}}, You have {{Auth::user()->getCredit()}} credits to redeem in SportShop.
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    @else
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">You have {{Auth::user()->getCredit()}} credits.</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>
-                                        <div class="modal-body">
-                                        {{Auth::user()->getName()}}, You have {{Auth::user()->getCredit()}} credits to redeem in SportShop.
-                                        </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    @endif
+                                            <h5 class="modal-title" id="exampleModalLabel">You have {{Auth::user()->getCredit()}} credits.</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>
+                                            <div class="modal-body">
+                                            {{Auth::user()->getName()}}, You have {{Auth::user()->getCredit()}} credits to redeem in SportShop.
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        @endif
 
+                                    </div>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
+                            @endif
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
