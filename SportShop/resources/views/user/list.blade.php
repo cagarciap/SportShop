@@ -2,7 +2,29 @@
 
 @section('content')
 <div class="container">
-    <a href="{{ route('client.show_cart') }}" class="btn btn-outline-success cart-btn">Ver carrito</a><br><br>
+    @if(Auth::user() != null)
+        <a href="{{ route('client.show_cart') }}" class="btn btn-outline-success cart-btn">Ver carrito</a><br><br>
+    @endif
+    <div class="row">
+        <div class="col-md-12">
+        <form method="POST" action="{{ route('client.filter.product') }}" class="form">
+            @csrf
+            <div class="form-row category-filter">
+                <div class="form-group col-md-6">
+                    <select class="form-control" name="category">
+                            <option value="all">All</option>
+                        @foreach($data["categories"] as $category)
+                            <option value="{{ $category->getId() }}">{{ $category->getName() }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <button type="submit" class="btn btn-outline-success btn-block">Filter Products</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
     <div class="row justify-content-center">
         @foreach($data["products"] as $product)
             <div class="col-md-auto container-product"></div">

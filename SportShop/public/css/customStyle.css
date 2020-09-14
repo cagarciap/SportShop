@@ -140,3 +140,8 @@ table{
     border-radius: 50%;
     font-size: 18px;
 }
+
+.category-filter{
+    float: right; 
+    width: 500px;
+}

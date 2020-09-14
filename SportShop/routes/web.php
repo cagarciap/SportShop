@@ -12,25 +12,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('home.index');
-});
-
+Route::get('/', 'HomeController@home')->name("");
+Route::get('/', 'ProductController@list')->name("home");
 Route::get('/admin/index', 'Admin\AdminHomeController@index')->name("admin.home.index");
 
-
 // Routes cart
-Route::get('/home','HomeController@index')->name("home.index");
+Route::get('/home','ProductController@list')->name("home.index");
 Route::get('/client/list', 'ProductController@list')->name("client.list");
-Route::get('/client/cart/{id}', 'ProductController@add_cart')->name("client.add_cart");
+Route::post('/client/filter/list', 'ProductController@list')->name("client.filter.product");
+Route::get('/client/cart/{id}', 'SaleController@add_cart')->name("client.add_cart");
 Route::get('/client/show/{id}/{status?}', 'ProductController@show')->name("client.show");
-Route::get('/client/show_cart', 'ProductController@show_cart')->name("client.show_cart");
-Route::get('/client/delete/{id}', 'ProductController@delete')->name("client.delete");
-Route::post('/client/quantity/{id}', 'ProductController@modify_quantity')->name("client.quantity");
-Route::get('/client/buy', 'ProductController@buy')->name("client.confirm");
-
-
+Route::get('/client/show_cart', 'SaleController@show_cart')->name("client.show_cart");
+Route::get('/client/delete/{id}', 'SaleController@delete')->name("client.delete");
+Route::post('/client/quantity/{id}', 'SaleController@modify_quantity')->name("client.quantity");
+Route::get('/client/buy', 'SaleController@buy')->name("client.confirm");
 
 // Routes Admin - Sales
 Route::get('/admin/sale/menu', 'Admin\AdminSaleController@menu')->name("admin.sale.menu");
@@ -49,9 +44,6 @@ Route::get('/admin/product/delete/{id}','Admin\AdminProductController@delete')->
 Route::get('/admin/product/update_form/{id}','Admin\AdminProductController@update_form')->name("admin.product.update_form"); // post
 Route::post('/admin/product/update','Admin\AdminProductController@update')->name("admin.product.update");
 
-
-
-
 //Routes Categories
 Route::get('/admin/category/menu', 'Admin\AdminCategoryController@menu')->name("admin.category.menu");
 Route::get('/admin/category/list', 'Admin\AdminCategoryController@list')->name("admin.category.list");
@@ -63,7 +55,6 @@ Route::get('/admin/category/update_form/{id}','Admin\AdminCategoryController@upd
 Route::post('/admin/category/update','Admin\AdminCategoryController@update')->name("admin.category.update");
 
 //Routes Routines
-
 Route::get('/admin/routine', 'Admin\AdminRoutineController@menu')->name("admin.routine.menu");
 Route::get('/admin/routine/create', 'Admin\AdminRoutineController@create')->name("admin.routine.create");
 Route::get('/admin/routine/list', 'Admin\AdminRoutineController@list')->name("admin.routine.list");

@@ -2,51 +2,31 @@
 
 namespace App\Http\Controllers;
 use App\Product;
-use App\Item;
-use App\Sale;
-use App\User;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
 
-    public function list()
+    public function list(Request $request)
     {
         $data = [];
+        $categories = Category::all();
         $data["title"] = "List of products";
-        $data["products"] = Product::all();
-        return view("client.list")->with("data",$data);
-    }
-
-    public function add_cart($id)
-    {
-        $cart = session()->get("products");
-        if ($cart == null){
-            $cart[$id] = 1;
-        }elseif(!array_key_exists($id,$cart)){
-            $cart[$id] = 1;
-        }else{
-            $cart[$id] = $cart[$id]+1;
-        }
-        session()->put("products",$cart);
-        return redirect()->route('client.list');
-    }
-
-    public function show_cart()
-    {
-        $data = [];
-        $cart = session()->get("products");
-        if ($cart != null){
-            $products_id = array_keys($cart);
-            $products = Product::whereIn('id',$products_id)->get();
-            foreach ($products as $product) {
-                $product->setQuantity($cart[$product->getId()]);
+        $data["categories"] = $categories;
+        $category_selected = $request->input('category');
+        if($category_selected != null){
+            if ($category_selected == "all"){
+                $data["products"] = Product::all();
+            }else{
+                $data["products"] = Product::all()->whereIn('category_id',$category_selected);
             }
-            $data["products"] = $products;
-            return view("client.show_cart")->with("data",$data);
+        }else{
+            $data["products"] = Product::all();
         }
+        return view("user.list")->with("data",$data);
+        
     }
 
     public function show($id,$status=False){
@@ -63,90 +43,8 @@ class ProductController extends Controller
         }else{
             $data["status"] = False;
         }
-        return view('client.show')->with("data",$data);
+        return view('user.show')->with("data",$data);
     }
-
-    public function delete($id){
-        $cart = session()->get("products");
-        unset($cart[$id]);
-        session()->put("products",$cart);
-        return redirect()->route('client.show_cart');
-    }
-
-    public function modify_quantity(Request $request,$id){
-        $cart = session()->get("products");
-        $cart[$id] = $request->input('quantity');
-        session()->put("products",$cart);
-        return redirect()->route('client.show_cart');
-    }
-
-    public function buy(){
-        $rejectedProducts = [];
-        $validar = False;
-        $sale = new Sale();
-        $sale->setDate(date('Y-m-d'));
-        $sale->setTotal_to_pay(0);
-        $sale->setUserId(Auth::user()->getId());
-        $sale->save();
-        $total = 0;
-        $cart = session()->get("products");
-        $products_id = array_keys($cart);
-        for ($i = 0; $i < count($products_id); $i++){
-            $quantity = $cart[$products_id[$i]];
-            $product = Product::find($products_id[$i]);
-            $price = $product->getPrice();
-            $productQuantity = $product->getQuantity();
-            if ($quantity > $productQuantity){
-                $validar = True;
-                $rejectedProducts[$product->getId()] = $productQuantity;
-            }else{
-                $item = new Item();
-                $item->setQuantity($quantity);
-                $totalProduct = $price*$quantity;
-                $total = $total+$totalProduct;
-                $item->setTotal($totalProduct);
-                $item->setProductId($products_id[$i]);
-                $item->setSaleId($sale->getId());
-                $item->save();
-                $product->setQuantity($productQuantity-$quantity);
-                $product->save();
-            }
-
-        }
-        if ($validar == True){
-            for($i = 0; $i < count($products_id); $i++){
-                if (array_key_exists($products_id[$i],$rejectedProducts)){
-                    $cart[$products_id[$i]] = $rejectedProducts[$products_id[$i]];
-                }
-            }
-            session()->put("products",$cart);
-            $sale->delete();
-            return redirect()->route('client.show_cart');
-        }else{
-            $descuento = (5*$total)/100;
-            if(Auth::user()->getCredit() > 20){
-                $sale->setTotal_to_pay($total - $descuento);
-                Auth::user()->setCredit(Auth::user()->getCredit()-20);
-            }else{
-                $sale->setTotal_to_pay($total);
-            }
-            $sale->save();
-
-            /*$mess = session()->get("success");
-            $mess = "Your purchase was successful";
-            session()->put("success",$mess);
-            $mess = session()->get("success");*/
-            $cart = session()->forget('products');
-
-            if($total > 1000){
-                Auth::user()->setCredit((Auth::user()->getCredit())+5);
-            }
-            Auth::user()->save();
-            return redirect()->route('client.list');
-            //return $this->list();
-        }
-    }
-
 }
 
 
