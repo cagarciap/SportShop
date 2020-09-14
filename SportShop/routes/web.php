@@ -61,13 +61,15 @@ Route::get('/admin/routine/list', 'Admin\AdminRoutineController@list')->name("ad
 Route::post('/admin/routine/save', 'Admin\AdminRoutineController@save')->name("admin.routine.save");
 Route::get('/admin/routine/show/{id}', 'Admin\AdminRoutineController@show')->name("admin.routine.show");
 Route::get('/admin/routine/delete/{id}', 'Admin\AdminRoutineController@delete')->name("admin.routine.delete");
-
+Route::get('/admin/routine/update_form/{id}','Admin\AdminRoutineController@update_form')->name("admin.routine.update_form"); // post
+Route::post('/admin/routine/update','Admin\AdminRoutineController@update')->name("admin.routine.update");
 
 Route::get('/user/routine', 'RoutineController@menu')->name("user.routine.menu");
 Route::get('/user/routine/recommend', 'RoutineController@recommend')->name("user.routine.recommend");
 Route::post('/user/routine/calculate', 'RoutineController@calculate')->name("user.routine.calculate");
 Route::get('/user/routine/list', 'RoutineController@list')->name("user.routine.list");
 Route::get('/user/routine/show/{id}', 'RoutineController@show')->name("user.routine.show");
+Route::get('/user/routine/myroutine', 'RoutineController@myroutine')->name("user.routine.myroutine");
 
 
 // AUTH

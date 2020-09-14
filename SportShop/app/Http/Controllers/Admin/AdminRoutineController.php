@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Routine;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class AdminRoutineController extends Controller
 {
@@ -20,6 +21,14 @@ class AdminRoutineController extends Controller
             ["route" => "admin.routine.create", "title" => "Create Routine"],
             ["route" => "admin.routine.list", "title" => "List Routine"]
         ];
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if(Auth::user()->getRole()=="client"){
+                return redirect()->route('home.index');
+            }
+
+            return $next($request);
+        });
     }
 
     public function menu()
@@ -71,6 +80,32 @@ class AdminRoutineController extends Controller
         $data["routes"] = $this->routes;
         $data["nameMenu"] = $this->nameMenu;
         return view('admin.routine.show')->with("data",$data);
+    }
+
+    public function update_form($id)
+    {
+        try{
+            $routine = Routine::findOrFail($id);
+        }catch(ModelNotFoundException $e){
+            return redirect()->route('home.index');
+        }
+        $data = [];
+        $data["title"] = $routine->getName();
+        $data["routine"] = $routine;
+        $data["routes"] = $this->routes;
+        $data["nameMenu"] = $this->nameMenu;
+        return view('admin.routine.update')->with("data",$data);
+    }
+    
+    public function update(Request $request)
+    {
+        $routine = Routine::find($request->input('id'));
+        $routine->setName($request->input('name'));
+        $routine->setDescription($request->input('description'));
+        $routine->setMinMasa($request->input('minMasa'));
+        $routine->setMaxMasa($request->input('maxMasa'));
+        $routine->save();
+        return redirect()->route('admin.routine.list');
     }
 
     public function delete($id)
