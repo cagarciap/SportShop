@@ -4,6 +4,14 @@
 <div class="container">
    <div class="row justify-content-center">
       <div class="col-md-8">
+        @if ($data["categories"]->isEmpty())
+            <div class="text">
+                <div class="form-group col-md-12">
+                    (Don't have categories) <br> <br>
+                    <a href="{{ route('admin.category.create') }}" class="btn btn-outline-success btn-block">Create one category</a>
+                </div>
+            </div>
+        @else
          <table class="table table-striped">
             <thead>
                <tr>
@@ -25,6 +33,7 @@
                @endforeach
             </tbody>
          </table>
+        @endif
       </div>
    </div>
 </div>
