@@ -88,6 +88,9 @@ class SaleController extends Controller
             $price = $product->getPrice();
             $productQuantity = $product->getQuantity();
             if ($quantity > $productQuantity){
+                if($productQuantity==0){
+                    unset($cart[$products_id[$i]]);
+                }
                 $validar = True;
                 $rejectedProducts[$product->getId()] = $productQuantity;
             }else{
