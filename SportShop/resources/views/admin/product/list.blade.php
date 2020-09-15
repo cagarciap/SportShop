@@ -19,7 +19,7 @@
                 <div class="col-md-auto container-product">
                     <div class="row justify-content-center img-container">
                         <div class="col-12" align="center">
-                            <img src="/img/{{ $product->getImage() }}" class="list-picture">
+                            <img src="{{ asset('/img/'.$product->getImage()) }}" class="list-picture">
                         </div>
                     </div>
                     <div class="row justify-content-center">
