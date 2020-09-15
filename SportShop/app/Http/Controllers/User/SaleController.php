@@ -87,25 +87,24 @@ class SaleController extends Controller
             $product = Product::find($products_id[$i]);
             $price = $product->getPrice();
             $productQuantity = $product->getQuantity();
-            if ($quantity > $productQuantity){
-                if($productQuantity==0){
-                    unset($cart[$products_id[$i]]);
+            if($productQuantity != 0){
+                if ($quantity > $productQuantity){
+                    $validar = True;
+                    $rejectedProducts[$product->getId()] = $productQuantity;
+                }else{
+                    $item = new Item();
+                    $item->setQuantity($quantity);
+                    $totalProduct = $price*$quantity;
+                    $total = $total+$totalProduct;
+                    $item->setTotal($totalProduct);
+                    $item->setProductId($products_id[$i]);
+                    $item->setSaleId($sale->getId());
+                    $item->save();
+                    $product->setQuantity($productQuantity-$quantity);
+                    $product->save();
                 }
-                $validar = True;
-                $rejectedProducts[$product->getId()] = $productQuantity;
-            }else{
-                $item = new Item();
-                $item->setQuantity($quantity);
-                $totalProduct = $price*$quantity;
-                $total = $total+$totalProduct;
-                $item->setTotal($totalProduct);
-                $item->setProductId($products_id[$i]);
-                $item->setSaleId($sale->getId());
-                $item->save();
-                $product->setQuantity($productQuantity-$quantity);
-                $product->save();
+                    //unset($cart[$products_id[$i]]);
             }
-
         }
         if ($validar == True){
             for($i = 0; $i < count($products_id); $i++){
