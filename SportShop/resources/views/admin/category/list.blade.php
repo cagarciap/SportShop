@@ -33,7 +33,7 @@
                                 <td>{{ $category->getName() }}</td>
                                 <td>{{ $category->getDescription() }}</td>
                                 <td><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('admin.category.show',['id'=> $category->getId()])}}"><img src="{{ asset('/icons/file-earmark-text.svg') }}" class="delete-icon"></a></td>
-                                <td><a class="navbar-brand btn btn-outline-danger btn-block" href="{{ route('admin.category.delete',['id'=> $category->getId()])}}" onclick="return confirm('Are you sure to delete this category?')"><img src="{{ asset('/icons/trash.svg') }} class="delete-icon"></a></td>
+                                <td><a class="navbar-brand btn btn-outline-danger btn-block" href="{{ route('admin.category.delete',['id'=> $category->getId()])}}" onclick="return confirm('Are you sure to delete this category?')"><img src="{{ asset('/icons/trash.svg') }}" class="delete-icon"></a></td>
                             </tr>
                             @endforeach
                         </tbody>
