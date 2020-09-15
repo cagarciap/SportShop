@@ -9,15 +9,15 @@ use App\Item;
 
 class Product extends Model
 {
-    protected $fillable = ['name','description','quantity','price', 'size', 'image', 'category_id'];
-    //protected $fillable = ['name','description','quantity','price', 'size', 'image'];
+    // attributes id, name, description, quantity, price, size, image, category_id
+    protected $fillable = ['name','description','quantity','price', 'size', 'image'];
 
     public static function validate(Request $request){
         $request->validate([
             "name" => "required",
             "description" => "required",
-            "quantity" => "required|numeric",
-            "price" => "required|numeric|gt:0",
+            "quantity" => "required|numeric|min:0|max:2147483647",
+            "price" => "required|numeric|gt:0|min:0|max:999999.9999",
             "size" => "",
             "category" => "required"
         ]);

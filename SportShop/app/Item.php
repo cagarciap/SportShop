@@ -9,19 +9,8 @@ use App\Product;
 
 class Item extends Model
 {
-    protected $fillable = ['quantity','total','product_id','sale_id'];
-    //protected $fillable = ['name','description','quantity','price', 'size', 'image'];
-
-    /*public static function validate(Request $request){
-        $request->validate([
-            "name" => "required",
-            "description" => "required",
-            "quantity" => "required|numeric",
-            "price" => "required|numeric|gt:0",
-            "size" => "",
-            "category" => "required"
-        ]);
-    }*/
+    // attributes id, quantity, total, product_id, sale_id
+    protected $fillable = ['quantity','total'];
 
     public function getId()
     {

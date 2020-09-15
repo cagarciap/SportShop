@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class Routine extends Model
 {
-    //attributes id, name, price, created_at, updated_at
+    //attributes id, name, description, minMasa, maxMasa
     protected $fillable = ['name','description','minMasa','maxMasa'];
 
     public static function validate(Request $request)

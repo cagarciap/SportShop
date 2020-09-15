@@ -45,36 +45,36 @@
 
                                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        @if (Auth::user()->getCredit() >= 20)
-                                            <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Congratulations!! You have so much credits.</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body">
-                                            Congratulations {{Auth::user()->getName()}}, You have {{Auth::user()->getCredit()}} credits to redeem in SportShop.
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            </div>
-                                        @else
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">You have {{Auth::user()->getCredit()}} credits.</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body">
-                                            {{Auth::user()->getName()}}, You have {{Auth::user()->getCredit()}} credits to redeem in SportShop.
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            </div>
-                                        @endif
-
-                                    </div>
+                                        <div class="modal-content">
+                                            @if (Auth::user()->getCredit() >= 20)
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Congratulations!! You have so much credits.
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Congratulations {{Auth::user()->getName()}}, You have {{Auth::user()->getCredit()}} credits to redeem in SportShop.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            @else
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">You have {{Auth::user()->getCredit()}} credits.</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{Auth::user()->getName()}}, You have {{Auth::user()->getCredit()}} credits to redeem in SportShop.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             @endif
@@ -130,9 +130,14 @@
                                 <a class="navbar-brand" href="{{ route('user.routine.menu') }}">Exercise Routine Suggestion</a>
                             </ul>
                         @endif
-
+                    @else
+                        <ul class="navbar-nav mr-auto">
+                            <a class="navbar-brand" href="{{ route('client.list') }}">List Products</a>
+                        </ul>
+                        <ul class="navbar-nav mr-auto">
+                            <a class="navbar-brand" href="{{ route('user.routine.menu') }}">Exercise Routine Suggestion</a>
+                        </ul>
                     @endif
-
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

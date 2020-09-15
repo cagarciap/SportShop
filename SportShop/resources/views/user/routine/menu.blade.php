@@ -15,7 +15,7 @@
         </div>
     </div>
     <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <nav class="navbar navbar-expand-lg navbar-light">
             <img src="/icons/arrow-left-right.svg" class="menu-icon" id="menu-toggle">
         </nav>
 

@@ -12,20 +12,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'HomeController@home')->name("");
-Route::get('/', 'ProductController@list')->name("home");
+Route::get('/', 'User\HomeController@home')->name("");
+Route::get('/', 'User\ProductController@list')->name("home");
 Route::get('/admin/index', 'Admin\AdminHomeController@index')->name("admin.home.index");
 
 // Routes cart
-Route::get('/home','ProductController@list')->name("home.index");
-Route::get('/client/list', 'ProductController@list')->name("client.list");
-Route::post('/client/filter/list', 'ProductController@list')->name("client.filter.product");
-Route::get('/client/cart/{id}', 'SaleController@add_cart')->name("client.add_cart");
-Route::get('/client/show/{id}/{status?}', 'ProductController@show')->name("client.show");
-Route::get('/client/show_cart', 'SaleController@show_cart')->name("client.show_cart");
-Route::get('/client/delete/{id}', 'SaleController@delete')->name("client.delete");
-Route::post('/client/quantity/{id}', 'SaleController@modify_quantity')->name("client.quantity");
-Route::get('/client/buy', 'SaleController@buy')->name("client.confirm");
+Route::get('/home','User\ProductController@list')->name("home.index");
+Route::get('/client/cart_delete', 'User\SaleController@delete_cart')->name("client.delete.cart");
+Route::get('/client/list', 'User\ProductController@list')->name("client.list");
+Route::post('/client/filter/list', 'User\ProductController@list')->name("client.filter.product");
+Route::get('/client/cart/{id}', 'User\SaleController@add_cart')->name("client.add_cart");
+Route::get('/client/show/{id}/{status?}', 'User\ProductController@show')->name("client.show");
+Route::get('/client/show_cart', 'User\SaleController@show_cart')->name("client.show_cart");
+Route::get('/client/delete/{id}', 'User\SaleController@delete')->name("client.delete");
+Route::post('/client/quantity/{id}', 'User\SaleController@modify_quantity')->name("client.quantity");
+Route::get('/client/buy', 'User\SaleController@buy')->name("client.confirm");
 
 // Routes Admin - Sales
 Route::get('/admin/sale/menu', 'Admin\AdminSaleController@menu')->name("admin.sale.menu");
@@ -64,12 +65,12 @@ Route::get('/admin/routine/delete/{id}', 'Admin\AdminRoutineController@delete')-
 Route::get('/admin/routine/update_form/{id}','Admin\AdminRoutineController@update_form')->name("admin.routine.update_form"); // post
 Route::post('/admin/routine/update','Admin\AdminRoutineController@update')->name("admin.routine.update");
 
-Route::get('/user/routine', 'RoutineController@menu')->name("user.routine.menu");
-Route::get('/user/routine/recommend', 'RoutineController@recommend')->name("user.routine.recommend");
-Route::post('/user/routine/calculate', 'RoutineController@calculate')->name("user.routine.calculate");
-Route::get('/user/routine/list', 'RoutineController@list')->name("user.routine.list");
-Route::get('/user/routine/show/{id}', 'RoutineController@show')->name("user.routine.show");
-Route::get('/user/routine/myroutine', 'RoutineController@myroutine')->name("user.routine.myroutine");
+Route::get('/user/routine', 'User\RoutineController@menu')->name("user.routine.menu");
+Route::get('/user/routine/recommend', 'User\RoutineController@recommend')->name("user.routine.recommend");
+Route::post('/user/routine/calculate', 'User\RoutineController@calculate')->name("user.routine.calculate");
+Route::get('/user/routine/list', 'User\RoutineController@list')->name("user.routine.list");
+Route::get('/user/routine/show/{id}', 'User\RoutineController@show')->name("user.routine.show");
+Route::get('/user/routine/myroutine', 'User\RoutineController@myroutine')->name("user.routine.myroutine");
 
 
 // AUTH

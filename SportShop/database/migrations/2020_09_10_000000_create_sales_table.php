@@ -19,9 +19,6 @@ class CreateSalesTable extends Migration
             $table->double('total_to_pay',10,4);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            //$table->foreign('product_id')->references('id')->on('products');
-            //$table->bigInteger('sale_id')->unsigned();
-            //$table->foreign('sale_id')->references('id')->on('sales');
             $table->timestamps();
         });
     }

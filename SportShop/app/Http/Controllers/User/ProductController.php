@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
 use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
@@ -25,11 +27,11 @@ class ProductController extends Controller
         }else{
             $data["products"] = Product::all();
         }
-        return view("user.list")->with("data",$data);
+        return view("user.product.list")->with("data",$data);
         
     }
 
-    public function show($id,$status=False){
+    public function show($id){
         try{
             $product = Product::findOrFail($id);
         }catch(ModelNotFoundException $e){
@@ -38,12 +40,7 @@ class ProductController extends Controller
         $data = [];
         $data["title"] = "Product Information";
         $data["product"] = $product;
-        if ($status==True){
-            $data["status"] = True;
-        }else{
-            $data["status"] = False;
-        }
-        return view('user.show')->with("data",$data);
+        return view('user.product.show')->with("data",$data);
     }
 }
 

@@ -2,7 +2,6 @@
 
 @section('menu_content')
 <div class="container">
-    @include('util.message')
     @if ($data["products"]->isEmpty())
         <div class="row justify-content-center">
             <div class="col-md-6">

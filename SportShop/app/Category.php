@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class Category extends Model
 {
-    //attributes id, name, price, created_at, updated_at
+    //attributes id, name, description
     protected $fillable = ['name','description'];
 
     public static function validate(Request $request){

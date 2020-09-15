@@ -31,11 +31,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Product Quantity</label>
-                                    <input type="number" class="form-control" placeholder="Enter quantity" name="quantity" value="{{ old('quantity') }}" />
+                                    <input type="number" class="form-control" placeholder="Enter quantity" name="quantity" value="{{ old('quantity') }}" min="0" max="2147483647"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Product Price</label>
-                                    <input type="text" class="form-control" placeholder="Enter price" name="price" value="{{ old('price') }}" />
+                                    <input type="number" class="form-control" placeholder="Enter price" name="price" value="{{ old('price') }}" min="0" max="999999.9999" step="any"/>
                                 </div>
                             </div>
                             <div class="form-row">

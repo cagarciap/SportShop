@@ -8,8 +8,8 @@ use App\Item;
 
 class Sale extends Model
 {
-    //attributes id, date, total to pay, user_id, item_id
-    protected $fillable = ['date','total_to_pay','user_id'];
+    //attributes id, date, total to pay, user_id
+    protected $fillable = ['date','total_to_pay'];
 
     public static function validate(Request $request){
         $request->validate([

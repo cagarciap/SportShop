@@ -6,7 +6,10 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">The shopping cart is empty</div>
+                    <div class="card-header">
+                        The shopping cart is empty
+                        <a class="btn btn-outline-danger return-btn" href="{{ route('client.delete.cart') }}"><img src="/icons/cart-x.svg" class="delete-icon"></a>
+                    </div>
                     <div class="card-body">
                         <a href="{{ route('client.list') }}" class="btn btn-outline-success btn-block">List of products</a>
                     </div>
@@ -36,12 +39,12 @@
                                     <tr>
                                         <th>{{ $product->getName() }}</th>
                                         <th>{{ $product->getPrice() }}</th>
-                                        <th style="width: 20%">
+                                        <th class="quantity-column">
                                             <form action="{{ route('client.quantity',['id'=> $product->getId()]) }}" method="POST">
                                                 @csrf
                                                 <div class="form-row">
                                                     <div class="col-md-6">
-                                                        <input type="number" class="form-control" name="quantity" min="0" value="{{ $product->getQuantity() }}" style="width: 80px;">
+                                                        <input type="number" class="form-control" name="quantity" min="0" value="{{ $product->getQuantity() }}" class="quantity-input">
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <button type="submit" class="btn btn-outline-success add-btn"><b>+</b></button>

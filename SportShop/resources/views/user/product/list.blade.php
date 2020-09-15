@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @include('util.message')
     @if(Auth::user() != null)
         <a href="{{ route('client.show_cart') }}" class="btn btn-outline-success cart-btn">Ver carrito</a><br><br>
     @endif
@@ -41,11 +42,13 @@
                     <div class="col-4 product-information-2">
                         <b>{{ $product->getPrice() }}$</b>
                     </div>
+                    @if (Auth::user() != null)
+                        <div class="col-4 product-information-2">
+                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.add_cart',['id'=> $product->getId()]) }}"><img src="/icons/cart-plus.svg" class="delete-icon"></a>
+                        </div>
+                    @endif
                     <div class="col-4 product-information-2">
-                        <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.add_cart',['id'=> $product->getId()]) }}"><img src="/icons/cart-plus.svg" class="delete-icon"></a>
-                    </div>
-                    <div class="col-4 product-information-2">
-                        <a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('client.show',['id'=> $product->getId(),'status'=>True]) }}"><img src="/icons/file-earmark-text.svg" class="delete-icon"></a>
+                        <a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('client.show',['id'=> $product->getId()]) }}"><img src="/icons/file-earmark-text.svg" class="delete-icon"></a>
                     </div>
                 </div>
             </div>

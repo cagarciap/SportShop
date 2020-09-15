@@ -51,8 +51,6 @@ class AdminSaleController extends Controller
     {
         $startDate=$request->input('startDate');
         $endDate=$request->input('endDate');
-        echo "Star: ".$startDate;
-        echo "End: ".$endDate;
         $data = [];
         $data["title"] = "Sales List";
         $sales = Sale::all()->where('date','>=',$startDate)->where('date','<=',$endDate);

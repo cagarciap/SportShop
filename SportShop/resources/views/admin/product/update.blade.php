@@ -33,11 +33,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Product Quantity</label>
-                                <input type="number" class="form-control" placeholder="{{ $data['product']->getQuantity() }}" name="quantity" value="{{ $data['product']->getQuantity() }}" />
+                                <input type="number" class="form-control" placeholder="{{ $data['product']->getQuantity() }}" name="quantity" value="{{ $data['product']->getQuantity() }}" min="0" max="2147483647"/>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Product Price</label>
-                                <input type="text" class="form-control" placeholder="{{ $data['product']->getPrice() }}" name="price" value="{{ $data['product']->getPrice() }}" />
+                                <input type="text" class="form-control" placeholder="{{ $data['product']->getPrice() }}" name="price" value="{{ $data['product']->getPrice() }}" min="0" max="999999.9999"/>
                             </div>
                         </div>
                         <div class="form-row">

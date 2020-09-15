@@ -145,3 +145,11 @@ table{
     float: right; 
     width: 500px;
 }
+
+.quantity-column{
+    width: 20%;
+}
+
+.quantity-input{
+    width: 80px;
+}

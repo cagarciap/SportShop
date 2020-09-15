@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+
+use App\Http\Controllers\Controller;
 use App\Product;
 use App\Item;
 use App\Sale;
@@ -16,6 +18,7 @@ class SaleController extends Controller
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             if(Auth::user()==null){
+                $cart = session()->forget('products');
                 return redirect()->route('home.index');
             }
             return $next($request);
@@ -50,7 +53,7 @@ class SaleController extends Controller
         }else{
             $data["products"] = null;
         }
-        return view("user.show_cart")->with("data",$data);
+        return view("user.product.show_cart")->with("data",$data);
         
     }
 
@@ -113,7 +116,8 @@ class SaleController extends Controller
         }else{
             $descuento = (5*$total)/100;
             if(Auth::user()->getCredit() > 20){
-                $sale->setTotal_to_pay($total - $descuento);
+                $total = $total - $descuento;
+                $sale->setTotal_to_pay($total);
                 $subtract_credit = Auth::user()->getCredit()-20;
                 if ($subtract_credit < 0){
                     $subtract_credit = 0;
@@ -123,20 +127,22 @@ class SaleController extends Controller
                 $sale->setTotal_to_pay($total);
             }
             $sale->save();
-
-            /*$mess = session()->get("success");
-            $mess = "Your purchase was successful";
-            session()->put("success",$mess);
-            $mess = session()->get("success");*/
             $cart = session()->forget('products');
-
             if($total > 1000){
                 Auth::user()->setCredit((Auth::user()->getCredit())+5);
             }
             Auth::user()->save();
-            return redirect()->route('client.list');
+            $mess = "Your purchase was successful and you have to pay ".$total;
+            return redirect()->route('client.list')->with('success',$mess);
         }
     }
+
+    public function delete_cart()
+    {
+        $cart = session()->forget('products');
+        return redirect()->route('client.list');
+    }
+
 
 }
 
