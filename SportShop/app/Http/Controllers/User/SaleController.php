@@ -103,7 +103,9 @@ class SaleController extends Controller
                     $product->setQuantity($productQuantity-$quantity);
                     $product->save();
                 }
-                    //unset($cart[$products_id[$i]]);
+            }else{
+                unset($cart[$products_id[$i]]);
+                session()->put("products",$cart);
             }
         }
         if ($validar == True){
@@ -116,26 +118,31 @@ class SaleController extends Controller
             $sale->delete();
             return redirect()->route('client.show_cart');
         }else{
-            $descuento = (5*$total)/100;
-            if(Auth::user()->getCredit() > 20){
-                $total = $total - $descuento;
-                $sale->setTotal_to_pay($total);
-                $subtract_credit = Auth::user()->getCredit()-20;
-                if ($subtract_credit < 0){
-                    $subtract_credit = 0;
+            if($total != 0){
+                $descuento = (5*$total)/100;
+                if(Auth::user()->getCredit() > 20){
+                    $total = $total - $descuento;
+                    $sale->setTotal_to_pay($total);
+                    $subtract_credit = Auth::user()->getCredit()-20;
+                    if ($subtract_credit < 0){
+                        $subtract_credit = 0;
+                    }
+                    Auth::user()->setCredit($subtract_credit);
+                }else{
+                    $sale->setTotal_to_pay($total);
                 }
-                Auth::user()->setCredit($subtract_credit);
+                $sale->save();
+                $cart = session()->forget('products');
+                if($total > 1000){
+                    Auth::user()->setCredit((Auth::user()->getCredit())+5);
+                }
+                Auth::user()->save();
+                $mess = "Your purchase was successful and you have to pay ".$total;
+                return redirect()->route('client.list')->with('success',$mess);
             }else{
-                $sale->setTotal_to_pay($total);
+                $sale->delete();
+                return redirect()->route('client.show_cart');
             }
-            $sale->save();
-            $cart = session()->forget('products');
-            if($total > 1000){
-                Auth::user()->setCredit((Auth::user()->getCredit())+5);
-            }
-            Auth::user()->save();
-            $mess = "Your purchase was successful and you have to pay ".$total;
-            return redirect()->route('client.list')->with('success',$mess);
         }
     }
 
