@@ -31,7 +31,7 @@
             <div class="col-md-auto container-product"></div">
                 <div class="row justify-content-center img-container">
                     <div class="col-12" align="center">
-                        <img src="/img/{{ $product->getImage() }}" class="list-picture">
+                        <img src="{{ asset('/img/'.$product->getImage()) }}" class="list-picture">
                     </div>
                 </div>
                 <div class="row justify-content-center">
@@ -44,7 +44,7 @@
                     </div>
                     @if (Auth::user() != null)
                         <div class="col-4 product-information-2">
-                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.add_cart',['id'=> $product->getId()]) }}"><img src="/icons/cart-plus.svg" class="delete-icon"></a>
+                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.add_cart',['id'=> $product->getId()]) }}"><img src="{{ asset('/icons/cart-plus.svg') }}" class="delete-icon"></a>
                         </div>
                     @endif
                     <div class="col-4 product-information-2">
