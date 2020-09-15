@@ -8,7 +8,9 @@ use App\User;
 use App\Routineuser;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 
 class RoutineController extends Controller
 {
@@ -43,12 +45,16 @@ class RoutineController extends Controller
         $data = []; //to be sent to the view
         $data["title"] = "List Routines";
         try{
-            $userID = Auth::user()->getId();
-            $routineuser = Routineuser::where('user_id',$userID)->first();
-            $routineId =  $routineuser->getRoutineId();
-            $routine = Routine::where('id',$routineId)->first();
-            //dd($routine->getName());
-            $data["routines"] = $routine;
+            $routinesuser = Auth::user()->routineusers;
+            $count = count($routinesuser);
+            if($count>0){
+            	$routineId = $routinesuser[$count-1]->getRoutineId();
+        		$routine = Routine::findOrFail($routineId);
+        		$data["routines"] = $routine;
+            }else{
+            	return redirect()->route('user.routine.recommend');
+            }
+            
         }catch(ModelNotFoundException $e){
             return redirect()->route('home.index');
         }
@@ -108,10 +114,21 @@ class RoutineController extends Controller
         if($routine != null)
         {
         	$data['bmiRoutine'] = $routine;
-            $routineuser = new Routineuser();
-            $routineuser->setUserId(Auth::user()->getId());
-            $routineuser->setRoutineId($routine->getId());
-            $routineuser->save();
+        	$userId = Auth::user()->getId();
+        	$routineusers = Routineuser::where('user_id', $userId)->first();
+        	
+        	if($routineusers != null){
+        		if($routineusers->getRoutineId() != $routine->getId()){
+           	 		$routineusers->setRoutineId($routine->getId());
+           	 		$routineusers->save();
+            	}
+            }else{
+                $routineuser = new Routineuser();
+            	$routineuser->setUserId(Auth::user()->getId());
+            	$routineuser->setRoutineId($routine->getId());
+            	$routineuser->save();
+            }
+            
             return view('user.routine.calculate')->with("data",$data);
         }else{
         	 return view('user.routine.notFounded');

@@ -5,8 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Routine Detail</div>
-
+                <div class="card-header">
+                	Routine Detail
+                </div>
                 <div class="card-body">
                 	<b>Name:</b> {{ $data["routine"]->getName() }}<br />
                     <b>Description:</b> {{ $data["routine"]->getDescription() }}<br />

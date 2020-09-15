@@ -14,14 +14,12 @@
                </tr>
             </thead>
             <tbody>
-       
                <tr>
                   <td>{{ $data["routines"]->getId() }}</td>
                   <td>{{ $data["routines"]->getName() }}</td>
                   <td>{{ $data["routines"]->getDescription() }}</td>
-                  <td><a class="navbar-brand" href="{{ route('user.routine.show',['id'=> $data['routines']->getId()])}}"><img src="/icons/eye.svg" </a></td>                  
+                  <td><a class="navbar-brand" href="{{ route('user.routine.show',['id'=> $data['routines']->getId()])}}"><img src="/icons/eye.svg" </a></td>                 
                </tr>
-
             </tbody>
          </table>
       </div>

@@ -64,7 +64,7 @@ class AdminRoutineController extends Controller
       Routine::validate($request);
       Routine::create($request->only(["name","description","minMasa","maxMasa"]));
 
-      return back()->with('success','Elemento creado satisfactoriamente!');
+      return back()->with('success','item created successfully!');
     }
 
     public function show($id)
