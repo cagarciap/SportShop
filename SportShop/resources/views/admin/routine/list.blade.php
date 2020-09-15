@@ -19,8 +19,8 @@
                   <td>{{ $routine->getId() }}</td>
                   <td>{{ $routine->getName() }}</td>
                   <td>{{ $routine->getDescription() }}</td>
-                  <td><a class="navbar-brand" href="{{ route('admin.routine.show',['id'=> $routine->getId()])}}"><img src="/icons/eye.svg" class="delete-icon"></a></td>
-                  <td><a class="navbar-brand" href="{{ route('admin.routine.delete',['id'=> $routine->getId()])}}" onclick="return confirm('Are you sure to delete this routine?')"><img src="/icons/trash.svg" class="delete-icon"></a></td>
+                  <td><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('admin.routine.show',['id'=> $routine->getId()])}}"><img src="/icons/file-earmark-text.svg" class="delete-icon"></a></td>
+                  <td><a class="navbar-brand btn btn-outline-danger btn-block" href="{{ route('admin.routine.delete',['id'=> $routine->getId()])}}" onclick="return confirm('Are you sure to delete this routine?')"><img src="/icons/trash.svg" class="delete-icon"></a></td>
                </tr>
                @endforeach
             </tbody>

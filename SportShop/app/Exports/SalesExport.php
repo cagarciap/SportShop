@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\Sale;
-use DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -25,7 +24,7 @@ class SalesExport implements FromCollection,WithHeadings
     }
     public function collection()
     {
-         $sales = DB::table('Sales')->get();
+         $sales = Sale::all();
          return $sales;
         
     }
