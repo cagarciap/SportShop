@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section("title", "Product Menu")
+@section("title", "Menu")
 
 @section('content')
 <div class="d-flex" id="wrapper">
