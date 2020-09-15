@@ -24,7 +24,7 @@
                             <input type="text" class="form-control" placeholder="Enter Name" name="name" value="{{ old('name') }}" />
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Category Name</label>
+                            <label>Description</label>
                             <input type="text" class="form-control" placeholder="Enter Description" name="description" value="{{ old('description') }}" />
                         </div>
                     </div>
