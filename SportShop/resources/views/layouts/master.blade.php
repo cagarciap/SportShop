@@ -11,8 +11,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    <img src="{{ asset('/img/logo.jpeg') }}" class="img-logo">
+                <a class="navbar-brand img-logo" href="{{ url('/home') }}">
+                    <img src="{{ asset('/img/logo.jpeg') }}">
                     SportShop
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
