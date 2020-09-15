@@ -20,7 +20,7 @@
                             <b>Category Product:</b> {{ $data["product"]->category->getName() }}<br/>
                         </div>
                         <div class="col-sm-4 show-product-information">
-                            <img src="/img/{{ $data['product']->getImage() }}" class="show-image">
+                            <img src="{{ asset('/img/'.$data['product']->getImage()) }}" class="show-image">
                         </div>
                     </div>
                     <div class="row">

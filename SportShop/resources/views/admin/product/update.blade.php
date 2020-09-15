@@ -57,7 +57,7 @@
                         <div class="form-row justify-content-center">
                             <div align="center">
                                 <label>Preview Image</label></br>
-                                <img src="/img/{{ $data['product']->getImage() }}" class="list-picture">
+                                <img src="{{ asset('/img/'.$data['product']->getImage()) }}" class="list-picture">
                             </div>
                         </div>
                         <div class="form-row">
