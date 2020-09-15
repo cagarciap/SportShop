@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     Product Information
-                    <a class="btn btn-outline-info return-btn" href="{{ route('admin.product.list') }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                    <a class="btn btn-outline-info return-btn" href="{{ route('admin.product.list') }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                 </div>
                 <div class="card-body">
                     <div class="row">

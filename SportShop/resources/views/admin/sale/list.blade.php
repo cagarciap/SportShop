@@ -38,7 +38,7 @@
                                         <th>{{ $sale->getDate() }}</th>
                                         <th>{{ $sale->getTotal_to_pay() }}</th>
                                         <th>{{ $sale->getUserId() }}</th>
-                                        <th><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('admin.sale.show',['id'=> $sale->getId()]) }}"><img src="/icons/file-earmark-text.svg" class="delete-icon"></a></th>
+                                        <th><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('admin.sale.show',['id'=> $sale->getId()]) }}"><img src="{{ asset('/icons/file-earmark-text.svg') }}" class="delete-icon"></a></th>
                                     </tr>
                                 @endforeach
                             </tbody>

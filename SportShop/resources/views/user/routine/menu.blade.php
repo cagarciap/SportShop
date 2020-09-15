@@ -16,7 +16,7 @@
     </div>
     <div id="page-content-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <img src="/icons/arrow-left-right.svg" class="menu-icon" id="menu-toggle">
+            <img src="{{ asset('/icons/arrow-left-right.svg') }}" class="menu-icon" id="menu-toggle">
         </nav>
 
         <main class="container-fluid">

@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     Product Information
-                    <a class="btn btn-outline-info return-btn" href="{{ route('admin.product.show',['id' => $data['product']->getId()]) }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                    <a class="btn btn-outline-info return-btn" href="{{ route('admin.product.show',['id' => $data['product']->getId()]) }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                 </div>
                 <div class="card-body">
                     @if($errors->any())

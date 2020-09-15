@@ -31,7 +31,7 @@
                             <b>Price:  {{ $product->getPrice() }}$</b>
                         </div>
                         <div class="col-4 product-information-2">
-                            <a class="navbar-brand  btn btn-outline-info btn-block" href="{{ route('admin.product.show',['id'=> $product->getId()]) }}"><img src="/icons/file-earmark-text.svg" class="delete-icon"></a>
+                            <a class="navbar-brand  btn btn-outline-info btn-block" href="{{ route('admin.product.show',['id'=> $product->getId()]) }}"><img src="{{ asset('/icons/file-earmark-text.svg') }}" class="delete-icon"></a>
                         </div>
                     </div>
                 </div>

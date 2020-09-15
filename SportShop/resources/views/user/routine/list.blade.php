@@ -19,7 +19,7 @@
                   <td>{{ $routine->getId() }}</td>
                   <td>{{ $routine->getName() }}</td>
                   <td>{{ $routine->getDescription() }}</td>
-                  <td><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('user.routine.show',['id'=> $routine->getId()])}}"><img src="/icons/file-earmark-text.svg" </a></td>                  
+                  <td><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('user.routine.show',['id'=> $routine->getId()])}}"><img src="{{ asset('/icons/file-earmark-text.svg') }}"></a></td>                  
                </tr>
                @endforeach
             </tbody>

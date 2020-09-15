@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                 	Calculated data
-                    <a class="btn btn-outline-info return-btn" href="{{ route('user.routine.recommend') }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                    <a class="btn btn-outline-info return-btn" href="{{ route('user.routine.recommend') }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                 </div>
                 <div class="card-body"> 
                     <b>Your Body Mass Index is:</b> {{ $data['bodyMI'] }}<br />
@@ -22,7 +22,7 @@
                		  <tbody>
                     	<tr>
                   			<td>{{ $data['bmiRoutine']->getName() }}</td>
-                  			<td><a class="navbar-brand" href="{{ route('user.routine.show',['id'=> $data['bmiRoutine']->getId()])}}"><img src="/icons/eye.svg" </a></td>
+                  			<td><a class="navbar-brand" href="{{ route('user.routine.show',['id'=> $data['bmiRoutine']->getId()])}}"><img src="{{ asset('/icons/file-earmark-text.svg') }}" </a></td>
                   		</tr>
                   	  </tbody>
                   	</table>

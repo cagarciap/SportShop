@@ -18,7 +18,7 @@
                   <td>{{ $data["routines"]->getId() }}</td>
                   <td>{{ $data["routines"]->getName() }}</td>
                   <td>{{ $data["routines"]->getDescription() }}</td>
-                  <td><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('user.routine.show',['id'=> $data['routines']->getId()])}}"><img src="/icons/file-earmark-text.svg" </a></td>                 
+                  <td><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('user.routine.show',['id'=> $data['routines']->getId()])}}"><img src="{{ asset('/icons/file-earmark-text.svg') }}"></a></td>                 
                </tr>
             </tbody>
          </table>

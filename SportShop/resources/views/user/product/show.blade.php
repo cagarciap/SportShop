@@ -8,9 +8,9 @@
                 <div class="card-header">
                     Product Information
                     @if (Auth::user() != null)
-                        <a class="btn btn-outline-info return-btn" href="{{ url()->previous() }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                        <a class="btn btn-outline-info return-btn" href="{{ url()->previous() }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                     @else
-                        <a class="btn btn-outline-info return-btn" href="{{ route('client.list') }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                        <a class="btn btn-outline-info return-btn" href="{{ route('client.list') }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                     @endif
                 </div>
                 <div class="card-body">
@@ -30,7 +30,7 @@
                     @if (Auth::user() != null)
                     <div class="row">
                         <div class="form-group col-md-12">
-                            <a class="btn btn-outline-success btn-block" href="{{ route('client.add_cart',['id'=> $data['product']->getId()]) }}"><img src="/icons/cart-plus.svg" class="delete-icon"></a>
+                            <a class="btn btn-outline-success btn-block" href="{{ route('client.add_cart',['id'=> $data['product']->getId()]) }}"><img src="{{ asset('/icons/cart-plus.svg') }}" class="delete-icon"></a>
                         </div>
                     </div>
                     @endif
