@@ -38,6 +38,7 @@
                     </tbody>
                 </table>
             </div>
-    </div>
+        </div>
+    @endif
 </div>
 @endsection
