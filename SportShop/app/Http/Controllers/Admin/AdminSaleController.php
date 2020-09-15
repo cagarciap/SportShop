@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Sale;
 use App\Item;
 use App\Category;
+use App\Exports\SalesExport;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminSaleController extends Controller
 {
@@ -68,5 +70,10 @@ class AdminSaleController extends Controller
         $items = Item::all()->whereIn('sale_id',$id);
         $data["items"] = $items;
         return view('admin.sale.show')->with("data",$data);
+    }
+
+    public function export()
+    {
+        return Excel::download(new SalesExport, 'sales.xlsx');
     }
 }

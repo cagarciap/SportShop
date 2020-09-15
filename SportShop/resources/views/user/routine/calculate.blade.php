@@ -5,8 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Calculated data</div>
-
+                <div class="card-header">
+                	Calculated data
+                    <a class="btn btn-outline-info return-btn" href="{{ route('user.routine.recommend') }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                </div>
                 <div class="card-body"> 
                     <b>Your Body Mass Index is:</b> {{ $data['bodyMI'] }}<br />
                     <b>Your body state is:</b> {{ $data['stateBody'] }}<br />

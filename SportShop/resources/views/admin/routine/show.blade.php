@@ -5,8 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Routine Detail</div>
-
+                <div class="card-header">
+                	Routine Detail
+                    <a class="btn btn-outline-info return-btn" href="{{ route('admin.routine.list') }}"><img src="/icons/arrow-return-left.svg" class="delete-icon"></a>
+                </div>
                 <div class="card-body"> 
                     <b>Name:</b> {{ $data["routine"]->getName() }}<br />
                     <b>Description:</b> {{ $data["routine"]->getDescription() }}<br />

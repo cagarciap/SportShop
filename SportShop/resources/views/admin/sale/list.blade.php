@@ -43,6 +43,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="form-row">
+                            <div class="col-sm-5 update-btn">
+                                <a class="btn btn-success" href="{{ route('admin.sale.export') }}">Download Excel</a>
+                            </div>
+                    	</div>
                     </div>
                 </div>
             </div>

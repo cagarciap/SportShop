@@ -77,4 +77,7 @@ class Routine extends Model
         $this->attributes['maxMasa'] = $maxMasa;
     }
 
+    public function routineusers(){
+        return $this->hasMany(Routineuser::class);
+    }
 }

@@ -33,7 +33,7 @@ Route::get('/admin/sale/menu', 'Admin\AdminSaleController@menu')->name("admin.sa
 Route::get('/admin/sale/list', 'Admin\AdminSaleController@list')->name("admin.sale.list");
 Route::get('/admin/sale/show/{id}', 'Admin\AdminSaleController@show')->name("admin.sale.show");
 Route::post('/admin/sale/query1', 'Admin\AdminSaleController@query1')->name("admin.sale.query1");
-
+Route::get('/admin/sale/export', 'Admin\AdminSaleController@export')->name("admin.sale.export");
 
 // Routes admin - product
 Route::get('/admin/product/menu', 'Admin\AdminProductController@menu')->name("admin.product.menu");
