@@ -20,11 +20,13 @@
                             <b>Product Description:</b> {{ $data["product"]->getDescription() }}<br/> 
                             <b>Product Quantity:</b> {{ $data["product"]->getQuantity() }}<br/> 
                             <b>Product Price:</b> {{ $data["product"]->getPrice() }}<br/> 
-                            <b>Product Size:</b> {{ $data["product"]->getSize() }}<br/>
+                            @if ($data["product"]->getSize() != null)
+                                <b>Product Size:</b> {{ $data["product"]->getSize() }}<br/>
+                            @endif
                             <b>Product Category:</b> {{ $data["product"]->category->getName() }}<br/>
                         </div>
                         <div class="col-sm-4 show-product-information">
-                            <img src="/img/{{ $data['product']->getImage() }}" class="show-image">
+                            <img src="{{ asset('/img/'.$data['product']->getImage()) }}" class="show-image">
                         </div>
                     </div>
                     @if (Auth::user() != null)
