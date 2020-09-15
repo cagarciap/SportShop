@@ -2,13 +2,13 @@
 
 @section('routine_content')
 <div class="container">
-    @if ($data["products"]->isEmpty())
+    @if ($data["routines"]->isEmpty())
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Don't have any products</div>
+                    <div class="card-header">Don't have any Routines</div>
                     <div class="card-body">
-                        <a href="{{ route('admin.product.create') }}" class="btn btn-outline-success btn-block">Create Product</a>
+                        <a href="{{ route('client.list') }}" class="btn btn-outline-success btn-block">Product List</a>
                     </div>
                 </div>
             </div>
