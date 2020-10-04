@@ -25,7 +25,7 @@
                         <a class="btn btn-outline-info return-btn" href="{{ route('client.list') }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="table">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -59,10 +59,10 @@
                             </tbody>
                         </table>
                         <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.confirm') }}"><img src="{{ asset('/icons/cart-check.svg') }}" class="delete-icon"></a>
+                            <div class="form-group col-md-12">
+                                <a class="navbar-brand btn btn-outline-success btn-block" data-toggle="modal" data-target="#confirm"><img src="{{ asset('/icons/cart-check.svg') }}" class="delete-icon"></a>
+                            </div>
                         </div>
-                    </div>
                     </div>
                     
                 </div>
@@ -70,4 +70,39 @@
         </div>
     @endif
 </div>
+<div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-title">Are you sure to this purchase?</h5>
+                <h5 class="modal-title" id="total_to_pay"></h5></br>
+                @if (Auth::user()->getCredit() >= 20)
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <a class="navbar-brand btn btn-outline-warning btn-block" href="{{ route('client.confirm',['credits'=>'True']) }}">Use Credits</a>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.confirm',['credits'=>'False']) }}">Save Credits</a>
+                        </div>
+                    </div>
+                @else
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.confirm',['credits'=>'False']) }}">Confirm Purchase</a>
+                        </div>
+                    </div> 
+                @endif
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+

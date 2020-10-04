@@ -71,78 +71,78 @@ class SaleController extends Controller
         return redirect()->route('client.show_cart');
     }
 
-    public function buy(){
-        $rejectedProducts = [];
-        $validar = False;
+    public function buy($credits){
         $sale = new Sale();
         $sale->setDate(date('Y-m-d'));
         $sale->setTotal_to_pay(0);
         $sale->setUserId(Auth::user()->getId());
         $sale->save();
         $total = 0;
+        $check = False;
+        $checkStock = False;
         $cart = session()->get("products");
         $products_id = array_keys($cart);
         for ($i = 0; $i < count($products_id); $i++){
             $quantity = $cart[$products_id[$i]];
             $product = Product::find($products_id[$i]);
-            $price = $product->getPrice();
             $productQuantity = $product->getQuantity();
-            if($productQuantity != 0){
-                if ($quantity > $productQuantity){
-                    $validar = True;
-                    $rejectedProducts[$product->getId()] = $productQuantity;
-                }else{
-                    $item = new Item();
-                    $item->setQuantity($quantity);
-                    $totalProduct = $price*$quantity;
-                    $total = $total+$totalProduct;
-                    $item->setTotal($totalProduct);
-                    $item->setProductId($products_id[$i]);
-                    $item->setSaleId($sale->getId());
-                    $item->save();
-                    $product->setQuantity($productQuantity-$quantity);
-                    $product->save();
-                }
-            }else{
+            if ($productQuantity <= 0){
+                $checkStock = True;
                 unset($cart[$products_id[$i]]);
-                session()->put("products",$cart);
-            }
-        }
-        if ($validar == True){
-            for($i = 0; $i < count($products_id); $i++){
-                if (array_key_exists($products_id[$i],$rejectedProducts)){
-                    $cart[$products_id[$i]] = $rejectedProducts[$products_id[$i]];
-                }
+            }elseif($quantity > $productQuantity){
+                $check = True;
+                $cart[$products_id[$i]] = $productQuantity;
             }
             session()->put("products",$cart);
-            $sale->delete();
-            return redirect()->route('client.show_cart');
-        }else{
-            if($total != 0){
-                $descuento = (5*$total)/100;
-                if(Auth::user()->getCredit() > 20){
-                    $total = $total - $descuento;
-                    $sale->setTotal_to_pay($total);
-                    $subtract_credit = Auth::user()->getCredit()-20;
-                    if ($subtract_credit < 0){
-                        $subtract_credit = 0;
-                    }
-                    Auth::user()->setCredit($subtract_credit);
-                }else{
-                    $sale->setTotal_to_pay($total);
-                }
-                $sale->save();
-                $cart = session()->forget('products');
-                if($total > 1000){
-                    Auth::user()->setCredit((Auth::user()->getCredit())+5);
-                }
-                Auth::user()->save();
-                $mess = "Your purchase was successful and you have to pay ".$total;
-                return redirect()->route('client.list')->with('success',$mess);
-            }else{
+            $carrito = session()->get("products");
+            if ($check == True){
                 $sale->delete();
                 return redirect()->route('client.show_cart');
+            }elseif ($checkStock == True){
+                $sale->delete();
+                $mess = "The product ".$product->getName() ." is out of stock  ";
+                return redirect()->route('client.list')->with('success',$mess);
+            }else{
+                $item = new Item();
+                $item->setQuantity($quantity);
+                $totalProduct = $product->getPrice()*$quantity;
+                $total = $total+$totalProduct;
+                $item->setTotal($totalProduct);
+                $item->setProductId($products_id[$i]);
+                $item->setSaleId($sale->getId());
+                $item->save();
+                if ($productQuantity-$quantity < 0){
+                    $product->setQuantity(0);
+                }else{
+                    $product->setQuantity($productQuantity-$quantity);
+                }
+                $product->save();
             }
+        }
+        if($total != 0){
+            if($credits == "True"){
+                $descuento = (5*$total)/100;
+                $total = $total - $descuento;
+                $sale->setTotal_to_pay($total);
+                $subtract_credit = Auth::user()->getCredit()-20;
+                if ($subtract_credit < 0){
+                    $subtract_credit = 0;
+                }
+                Auth::user()->setCredit($subtract_credit);
+            }else{
+                $sale->setTotal_to_pay($total);
+            }
+            $sale->save();
+            $cart = session()->forget('products');
+            if($total > 1000){
+                Auth::user()->setCredit((Auth::user()->getCredit())+5);
+            }
+            Auth::user()->save();
+            $mess = "Your purchase was successful and you have to pay ".$total;
+            return redirect()->route('client.list')->with('success',$mess);
+        }else{
+            $sale->delete();
+            return redirect()->route('client.show_cart');
         }
     }
 
@@ -151,8 +151,6 @@ class SaleController extends Controller
         $cart = session()->forget('products');
         return redirect()->route('client.list');
     }
-
-
 }
 
 

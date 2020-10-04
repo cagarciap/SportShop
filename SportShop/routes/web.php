@@ -26,7 +26,7 @@ Route::get('/client/show/{id}/{status?}', 'User\ProductController@show')->name("
 Route::get('/client/show_cart', 'User\SaleController@show_cart')->name("client.show_cart");
 Route::get('/client/delete/{id}', 'User\SaleController@delete')->name("client.delete");
 Route::post('/client/quantity/{id}', 'User\SaleController@modify_quantity')->name("client.quantity");
-Route::get('/client/buy', 'User\SaleController@buy')->name("client.confirm");
+Route::get('/client/buy/{credits}', 'User\SaleController@buy')->name("client.confirm");
 
 // Routes Admin - Sales
 Route::get('/admin/sale/menu', 'Admin\AdminSaleController@menu')->name("admin.sale.menu");
