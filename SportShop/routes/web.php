@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', 'User\HomeController@home')->name("");
 Route::get('/', 'User\ProductController@list')->name("home");
+Route::get('/user/sale/list', 'User\SaleController@list')->name("user.sale.list");
+Route::get('/user/sale/show/{id}', 'User\SaleController@show')->name("user.sale.show");
 Route::get('/admin/index', 'Admin\AdminHomeController@index')->name("admin.home.index");
 
 // Routes cart

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Category Information</div>
+                <div class="card-header">{{ __('category.label.info') }}</div>
                 <div class="card-body">
                     @if($errors->any())
                     <ul id="errors">
@@ -19,20 +19,20 @@
                         <input type="hidden" name="id" value="{{ $data['category']->getId() }}">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>Category Name</label>
+                                <label>{{ __('category.label.categoryName') }}</label>
                                 <input type="text" class="form-control" placeholder="{{ $data['category']->getName() }}" name="name" value="{{ $data['category']->getName() }}" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Category Description</label>
+                                <label>{{ __('category.label.description') }}</label>
                                 <input type="text" class="form-control" placeholder="{{ $data['category']->getDescription() }}" name="description" value="{{ $data['category']->getDescription() }}" />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <button type="submit" class="btn btn-outline-success btn-block">Update Category</button>
+                                <button type="submit" class="btn btn-outline-success btn-block">{{ __('category.holder.update') }}</button>
                             </div>
                             <div class="form-group col-md-6">
-                                <a class="btn btn-outline-danger btn-block" href="{{ route('admin.category.delete',['id'=> $data['category']->getId()]) }}" onclick="return confirm('Are you sure to delete this category?')">Delete Category</a>
+                                <a class="btn btn-outline-danger btn-block" href="{{ route('admin.category.delete',['id'=> $data['category']->getId()]) }}" onclick="return confirm('Are you sure to delete this category?')">{{ __('category.holder.delete') }}</a>
                             </div>
                         </div>
                     </form>

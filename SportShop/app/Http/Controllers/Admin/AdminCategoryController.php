@@ -13,14 +13,9 @@ use phpDocumentor\Reflection\Types\Null_;
 class AdminCategoryController extends Controller
 {
     protected $routes = [];
-    protected $nameMenu = "Category Controller";
 
     public function __construct()
     {
-        $this->routes = [
-            ["route" => "admin.category.create", "title" => "Create Category"],
-            ["route" => "admin.category.list", "title" => "Category List"],
-        ];
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             if(Auth::user()->getRole()=="client"){
@@ -31,11 +26,18 @@ class AdminCategoryController extends Controller
         });
     }
 
+    public function routes(){
+        return [
+            ["route" => "admin.category.create", "title" => __('category.title.create')],
+            ["route" => "admin.category.list", "title" => __('category.title.list')],
+        ];
+    }
+
     public function menu()
     {
         $data = [];
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('category.title.controller');
         return view('admin.menu')->with("data",$data);
     }
 
@@ -45,8 +47,8 @@ class AdminCategoryController extends Controller
         $data = [];
         $data["title"] = "List of categories";
         $data["categories"] = $category;
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('category.title.controller');
         return view('admin.category.list')->with("data",$data);
     }
 
@@ -59,8 +61,8 @@ class AdminCategoryController extends Controller
         }
         $data = [];
         $data["category"] = $category;
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] =__('category.title.controller');
         return view('admin.category.show')->with("data",$data);
     }
 
@@ -68,8 +70,8 @@ class AdminCategoryController extends Controller
     {
         $data = [];
         $data["title"] = "Create Category";
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('category.title.controller');
         return view('admin.category.create')->with("data",$data);
     }
 
@@ -77,7 +79,7 @@ class AdminCategoryController extends Controller
     {
         Category::validate($request);
         Category::create($request->only(["name","description"]));
-        return back()->with('success','Item created successfully!');
+        return back()->with('success',__('category.holder.success'));
     }
 
     public function update_form($id)
@@ -90,8 +92,8 @@ class AdminCategoryController extends Controller
         $data = [];
         $data["title"] = $category->getName();
         $data["category"] = $category;
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('category.title.controller');
         return view('admin.category.update')->with("data",$data);
     }
 
