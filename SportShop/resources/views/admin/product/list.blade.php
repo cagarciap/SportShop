@@ -6,9 +6,9 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Don't have any products</div>
+                    <div class="card-header">{{ __('Product.list.empty') }}</div>
                     <div class="card-body">
-                        <a href="{{ route('admin.product.create') }}" class="btn btn-outline-success btn-block">Create Product</a>
+                        <a href="{{ route('admin.product.create') }}" class="btn btn-outline-success btn-block">{{ __('Product.menu.create') }}</a>
                     </div>
                 </div>
             </div>
@@ -20,6 +20,8 @@
                     <div class="row justify-content-center img-container">
                         <div class="col-12" align="center">
                             <img src="{{ asset('/img/'.$product->getImage()) }}" class="list-picture">
+                          
+                            <img src="{{ $product->getUrlPathAtribute }}" alt="">
                         </div>
                     </div>
                     <div class="row justify-content-center">

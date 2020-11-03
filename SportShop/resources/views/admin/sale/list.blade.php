@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Don't have any sales in this date</div>
+                    <div class="card-header">{{ __('Sale.empty') }}</div>
                 </div>
             </div>
         </div>
@@ -15,7 +15,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        Sales List 
+                        {{ __('Sale.title') }}
                     </div>
                     <div class="card-body">
                         <main class="py-4">
@@ -24,11 +24,11 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Sale Id</th>
-                                    <th>Sale Date</th>
-                                    <th>Total To Pay</th>
-                                    <th>User Id</th>
-                                    <th>Show Details</th>
+                                    <th>{{ __('Sale.id') }}</th>
+                                    <th>{{ __('Sale.date') }}</th>
+                                    <th>{{ __('Sale.total') }}</th>
+                                    <th>{{ __('Sale.user') }}</th>
+                                    <th>{{ __('Sale.details') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,7 +45,7 @@
                         </table>
                         <div class="form-row">
                             <div class="col-sm-5 update-btn">
-                                <a class="btn btn-success" href="{{ route('admin.sale.export') }}">Download Excel</a>
+                                <a class="btn btn-success" href="{{ route('admin.sale.export') }}">{{ __('Sale.download') }}</a>
                             </div>
                     	</div>
                     </div>

@@ -6,24 +6,24 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    Sales List 
+                    {{ __('Sale.title') }}
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.sale.query1') }}" enctype="multipart/form-data" class="form">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>Initial Date</label>
+                                <label>{{ __('Sale.initialDate') }}</label>
                                 <input type="date" class="form-control" name="startDate"/>
                             </div>
                             <div class="form-group col-md-6">
-                                <label>End Date</label>
+                                <label>{{ __('Sale.endDate') }}</label>
                                 <input type="date" class="form-control" name="endDate"/>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <button type="submit" class="btn btn-outline-success btn-block">Search</button>
+                                <button type="submit" class="btn btn-outline-success btn-block">{{ __('Sale.search') }}</button>
                             </div>
                         </div>
                     </form>

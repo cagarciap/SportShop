@@ -8,43 +8,44 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use App\Interfaces\ImageStorage;
 
 
 class AdminProductController extends Controller
 {
-    protected $routes = [];
-    protected $nameMenu = "Product Controller";
 
     public function __construct()
     {
-        $this->routes = [
-            ["route" => "admin.product.create", "title" => "Create Product"],
-            ["route" => "admin.product.list", "title" => "List Product"]
-        ];
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             if(Auth::user()->getRole()=="client"){
                 return redirect()->route('home.index');
             }
-
             return $next($request);
         });
+    }
+
+    public function routes(){
+        return [
+            ["route" => "admin.product.create", "title" => __('Product.menu.create')],
+            ["route" => "admin.product.list", "title" => __('Product.menu.list')]
+        ];
     }
 
     public function list()
     {
         $data = [];
-        $data["title"] = "List of products";
+        $data["title"] = __('Product.title_list');
         $data["products"] = Product::all();
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Product.menu.title');
         return view("admin.product.list")->with("data",$data);
     }
 
     public function menu()
     {
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Product.menu.title');
         return view('admin.menu')->with("data",$data);
     }
 
@@ -52,8 +53,8 @@ class AdminProductController extends Controller
     {
         $data = [];
         $data["categories"] = Category::all();
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Product.menu.title');
         return view('admin.product.create')->with("data",$data);
     }
 
@@ -73,7 +74,7 @@ class AdminProductController extends Controller
         $product->setImage($nameImage);
         $product->setCategoryId($request->input('category'));
         $product->save();
-        return back()->with('success','Item created successfully!');
+        return back()->with('success',__('Product.success_create'));
     }
 
     public function show($id)
@@ -84,10 +85,10 @@ class AdminProductController extends Controller
             return redirect()->route('home.index');
         }
         $data = [];
-        $data["title"] = "Product Information";
+        $data["title"] = __('Product.info');
         $data["product"] = $product;
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Product.menu.title');
         return view('admin.product.show')->with("data",$data);
     }
 
@@ -103,8 +104,8 @@ class AdminProductController extends Controller
         $data["title"] = $product->getName();
         $data["product"] = $product;
         $data["categories"] = $categories;
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Product.menu.title');
         return view('admin.product.update')->with("data",$data);
     }
 

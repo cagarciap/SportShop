@@ -4,7 +4,7 @@
 <div class="container">
     @include('util.message')
     @if(Auth::user() != null)
-        <a href="{{ route('client.show_cart') }}" class="btn btn-outline-success cart-btn">Ver carrito</a><br><br>
+        <a href="{{ route('client.show_cart') }}" class="btn btn-outline-success cart-btn">{{ __('Product.cart') }}</a><br><br>
     @endif
     <div class="row">
         <div class="col-md-12">
@@ -13,14 +13,14 @@
             <div class="form-row category-filter">
                 <div class="form-group col-md-6">
                     <select class="form-control" name="category">
-                            <option value="all">All</option>
+                            <option value="all">{{ __('Product.filter.input') }}</option>
                         @foreach($data["categories"] as $category)
                             <option value="{{ $category->getId() }}">{{ $category->getName() }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <button type="submit" class="btn btn-outline-success btn-block">Filter Products</button>
+                    <button type="submit" class="btn btn-outline-success btn-block">{{ __('Product.filter.button') }}</button>
                 </div>
             </div>
         </form>

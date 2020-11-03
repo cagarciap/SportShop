@@ -10,7 +10,7 @@ use App\Item;
 class Product extends Model
 {
     // attributes id, name, description, quantity, price, size, image, category_id
-    protected $fillable = ['name','description','quantity','price', 'size', 'image'];
+    protected $fillable = ['name','description','quantity','price', 'size', 'image', 'storage'];
 
     public static function validate(Request $request){
         $request->validate([
@@ -109,5 +109,15 @@ class Product extends Model
 
     public function items(){
         return $this->hasMany(Item::class);
+    }
+
+    public function getStorage()
+    {
+        return $this->attributes['storage'];
+    }
+
+    public function setStorage($storage)
+    {
+        $this->attributes['storage'] = $storage;
     }
 }

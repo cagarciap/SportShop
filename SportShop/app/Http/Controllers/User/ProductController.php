@@ -15,7 +15,7 @@ class ProductController extends Controller
     {
         $data = [];
         $categories = Category::all();
-        $data["title"] = "List of products";
+        $data["title"] = __('Product.title_list');
         $data["categories"] = $categories;
         $category_selected = $request->input('category');
         if($category_selected != null){
@@ -38,7 +38,7 @@ class ProductController extends Controller
             return redirect()->route('home.index');
         }
         $data = [];
-        $data["title"] = "Product Information";
+        $data["title"] = __('Product.info');
         $data["product"] = $product;
         return view('user.product.show')->with("data",$data);
     }

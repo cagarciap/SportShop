@@ -27,6 +27,20 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                    {{ Config::get('languages')[App::getLocale()] }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    @foreach (Config::get('languages') as $lang => $language)
+                                        @if ($lang != App::getLocale())
+                                            <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}">
+                                                {{$language}}
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -86,6 +100,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -110,7 +125,7 @@
                         @if (Auth::user()->getRole() == 'admin')
 
                         <ul class="navbar-nav mr-auto">
-                            <a class="navbar-brand" href="{{ route('admin.product.menu') }}">Product Control</a>
+                            <a class="navbar-brand" href="{{ route('admin.product.menu') }}">{{ __('Product.menu.title') }}</a>
                         </ul>
                         <ul class="navbar-nav mr-auto">
                             <a class="navbar-brand" href="{{ route('admin.category.menu') }}">Category Control</a>
@@ -119,13 +134,13 @@
                             <a class="navbar-brand" href="{{ route('admin.routine.menu') }}">Admin Routines Control</a>
                         </ul>
                         <ul class="navbar-nav mr-auto">
-                            <a class="navbar-brand" href="{{ route('admin.sale.menu') }}">Sales Control</a>
+                            <a class="navbar-brand" href="{{ route('admin.sale.menu') }}">{{ __('Sale.titleController') }}</a>
                         </ul>
                         @endif
 
                         @if (Auth::user()->getRole() == 'client')
                             <ul class="navbar-nav mr-auto">
-                                <a class="navbar-brand" href="{{ route('client.list') }}">List Products</a>
+                                <a class="navbar-brand" href="{{ route('client.list') }}">{{ __('Product.title_list') }}</a>
                             </ul>
                             <ul class="navbar-nav mr-auto">
                                 <a class="navbar-brand" href="{{ route('user.routine.menu') }}">Exercise Routine Suggestion</a>
@@ -133,7 +148,7 @@
                         @endif
                     @else
                         <ul class="navbar-nav mr-auto">
-                            <a class="navbar-brand" href="{{ route('client.list') }}">List Products</a>
+                            <a class="navbar-brand" href="{{ route('client.list') }}">{{ __('Product.title_list') }}</a>
                         </ul>
                         <ul class="navbar-nav mr-auto">
                             <a class="navbar-brand" href="{{ route('user.routine.menu') }}">Exercise Routine Suggestion</a>
@@ -147,6 +162,7 @@
                 </div>
             </div>
         </nav>
+
         <!-- Button trigger modal -->
         <main class="py-4">
             @yield('content')

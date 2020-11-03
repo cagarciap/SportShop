@@ -27,6 +27,7 @@ Route::get('/client/show_cart', 'User\SaleController@show_cart')->name("client.s
 Route::get('/client/delete/{id}', 'User\SaleController@delete')->name("client.delete");
 Route::post('/client/quantity/{id}', 'User\SaleController@modify_quantity')->name("client.quantity");
 Route::get('/client/buy/{credits}', 'User\SaleController@buy')->name("client.confirm");
+Route::post('/user/bill/','User\SaleController@bill')->name('download.bill');
 
 // Routes Admin - Sales
 Route::get('/admin/sale/menu', 'Admin\AdminSaleController@menu')->name("admin.sale.menu");
@@ -72,6 +73,8 @@ Route::get('/user/routine/list', 'User\RoutineController@list')->name("user.rout
 Route::get('/user/routine/show/{id}', 'User\RoutineController@show')->name("user.routine.show");
 Route::get('/user/routine/myroutine', 'User\RoutineController@myroutine')->name("user.routine.myroutine");
 
+// Lang
+Route::get('lang/{lang}','LanguageController@switchLang')->name('lang.switch');
 
 // AUTH
 Auth::routes();

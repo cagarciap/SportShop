@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Product Information
+                    {{ __('Product.info') }}
                     @if (Auth::user() != null)
                         <a class="btn btn-outline-info return-btn" href="{{ url()->previous() }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                     @else
@@ -16,14 +16,14 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-5 show-product-information">
-                            <b>Product Name:</b> {{ $data["product"]->getName() }}<br/>
-                            <b>Product Description:</b> {{ $data["product"]->getDescription() }}<br/> 
-                            <b>Product Quantity:</b> {{ $data["product"]->getQuantity() }}<br/> 
-                            <b>Product Price:</b> {{ $data["product"]->getPrice() }}<br/> 
+                            <b>{{ __('Product.input.name') }}</b> {{ $data["product"]->getName() }}<br/>
+                            <b>{{ __('Product.input.description') }}</b> {{ $data["product"]->getDescription() }}<br/> 
+                            <b>{{ __('Product.input.quantity') }}</b> {{ $data["product"]->getQuantity() }}<br/> 
+                            <b>{{ __('Product.input.price') }}</b> {{ $data["product"]->getPrice() }}<br/> 
                             @if ($data["product"]->getSize() != null)
-                                <b>Product Size:</b> {{ $data["product"]->getSize() }}<br/>
+                                <b>{{ __('Product.input.size') }}</b> {{ $data["product"]->getSize() }}<br/>
                             @endif
-                            <b>Product Category:</b> {{ $data["product"]->category->getName() }}<br/>
+                            <b>{{ __('Product.input.category') }}</b> {{ $data["product"]->category->getName() }}<br/>
                         </div>
                         <div class="col-sm-4 show-product-information">
                             <img src="{{ asset('/img/'.$data['product']->getImage()) }}" class="show-image">

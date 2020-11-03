@@ -21,7 +21,7 @@ class AdminSaleController extends Controller
     public function __construct()
     {
         $this->routes = [
-            ["route" => "admin.sale.list", "title" => "Sales List"],
+            ["route" => "admin.sale.list", "title" => __('Sale.title')],
         ];
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
@@ -36,7 +36,7 @@ class AdminSaleController extends Controller
     public function list()
     {
         $data = [];
-        $data["title"] = "Sales List";
+        $data["title"] = __('Sale.title');
         $data["routes"] = $this->routes;
         $data["nameMenu"] = $this->nameMenu;
         return view("admin.sale.dateForm")->with("data",$data);
@@ -54,7 +54,7 @@ class AdminSaleController extends Controller
         $startDate=$request->input('startDate');
         $endDate=$request->input('endDate');
         $data = [];
-        $data["title"] = "Sales List";
+        $data["title"] = __('Sale.title');
         $sales = Sale::all()->where('date','>=',$startDate)->where('date','<=',$endDate);
         $data["sales"] = $sales;
         $data["routes"] = $this->routes;

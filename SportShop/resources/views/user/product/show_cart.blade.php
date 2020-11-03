@@ -7,11 +7,11 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        The shopping cart is empty
+                        {{ __('Product.show_cart.empty') }}
                         <a class="btn btn-outline-danger return-btn" href="{{ route('client.delete.cart') }}"><img src="{{ asset('/icons/cart-x.svg') }}" class="delete-icon"></a>
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('client.list') }}" class="btn btn-outline-success btn-block">List of products</a>
+                        <a href="{{ route('client.list') }}" class="btn btn-outline-success btn-block">{{ __('Product.title_list') }}</a>
                     </div>
                 </div>
             </div>
@@ -21,16 +21,16 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Shopping Cart 
+                        {{ __('Product.show_cart.shopping') }}
                         <a class="btn btn-outline-info return-btn" href="{{ route('client.list') }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped" id="table">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
+                                    <th>{{ __('Product.show_cart.product') }}</th>
+                                    <th>{{ __('Product.show_cart.price') }}</th>
+                                    <th>{{ __('Product.show_cart.quantity') }}</th>
                                     <th colspan="2">Option</th>
                                 </tr>
                             </thead>
@@ -79,27 +79,27 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h5 class="modal-title">Are you sure to this purchase?</h5>
+                <h5 class="modal-title">{{ __('Product.show_cart.confirm') }}</h5>
                 <h5 class="modal-title" id="total_to_pay"></h5></br>
                 @if (Auth::user()->getCredit() >= 20)
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <a class="navbar-brand btn btn-outline-warning btn-block" href="{{ route('client.confirm',['credits'=>'True']) }}">Use Credits</a>
+                            <a class="navbar-brand btn btn-outline-warning btn-block" href="{{ route('client.confirm',['credits'=>'True']) }}">{{ __('Product.show_cart.useCredits') }}</a>
                         </div>
                         <div class="form-group col-md-6">
-                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.confirm',['credits'=>'False']) }}">Save Credits</a>
+                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.confirm',['credits'=>'False']) }}">{{ __('Product.show_cart.saveCredits') }}</a>
                         </div>
                     </div>
                 @else
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.confirm',['credits'=>'False']) }}">Confirm Purchase</a>
+                            <a class="navbar-brand btn btn-outline-success btn-block" href="{{ route('client.confirm',['credits'=>'False']) }}">{{ __('Product.show_cart.confirmButton') }}</a>
                         </div>
                     </div> 
                 @endif
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('Product.show_cart.close') }}</button>
             </div>
         </div>
     </div>

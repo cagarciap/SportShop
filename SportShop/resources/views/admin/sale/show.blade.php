@@ -6,15 +6,15 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    Sale Item
+                    {{ __('Sale.title') }}
                 </div>
                 <div class="card-body">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Product Name</th>
+                                <th>{{ __('Sale.quantity') }}</th>
+                                <th>{{ __('Sale.total') }}</th>
+                                <th>{{ __('Sale.name') }}</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -10,6 +10,9 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+//use App\Interfaces\Bill;
+use App\Interfaces\BillWay;
+use PDF;
 
 class SaleController extends Controller
 {
@@ -100,7 +103,7 @@ class SaleController extends Controller
                 return redirect()->route('client.show_cart');
             }elseif ($checkStock == True){
                 $sale->delete();
-                $mess = "The product ".$product->getName() ." is out of stock  ";
+                $mess = __('Sale.outStock', ['product' => $product->getName()]);
                 return redirect()->route('client.list')->with('success',$mess);
             }else{
                 $item = new Item();
@@ -133,17 +136,30 @@ class SaleController extends Controller
                 $sale->setTotal_to_pay($total);
             }
             $sale->save();
-            $cart = session()->forget('products');
+            //$cart = session()->forget('products');
             if($total > 1000){
                 Auth::user()->setCredit((Auth::user()->getCredit())+5);
             }
             Auth::user()->save();
-            $mess = "Your purchase was successful and you have to pay ".$total;
-            return redirect()->route('client.list')->with('success',$mess);
+            $mess = __('Sale.success', ['total' => $total]);
+            $arrayBill = [$sale->getId(),$sale->getDate(),$total,Auth::user()->getName()];
+            $billSession = session()->get("bill");
+            $billSession[0] = $arrayBill;
+            session()->put("bill",$billSession);
+
+            return view("user.product.download")->with('success',$mess);
+            //return redirect()->route('client.list')->with('success',$mess);
         }else{
             $sale->delete();
             return redirect()->route('client.show_cart');
         }
+    }
+
+    public function bill(Request $request){
+        $bill = $request->input('billWay');
+        $billWayInterface = app()->makeWith(BillWay::class, ['arrayBill' => $bill]);
+        $arrayBill = session()->get("bill");
+        return $billWayInterface->store($arrayBill);
     }
 
     public function delete_cart()
