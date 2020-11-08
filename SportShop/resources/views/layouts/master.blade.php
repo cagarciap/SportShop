@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>@yield('title','Home Page') Prueba</title>
+    <title>@yield('title','Home Page')</title>
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/customStyle.css') }}" rel="stylesheet">
