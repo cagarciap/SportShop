@@ -7,16 +7,22 @@ use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Http;
 
 class ProductController extends Controller
 {
 
     public function list(Request $request)
     {
+        $json_call = Http::get('http://api.openweathermap.org/data/2.5/weather?id=3674962&appid=b7a3324cc69cfcab437687bea7cd0c3a');
+        $weather = $json_call->json();
+        $temp = $weather['main']['temp'];
+        $temp = $temp - 273.15 + 6;
         $data = [];
         $categories = Category::all();
         $data["title"] = __('Product.title_list');
         $data["categories"] = $categories;
+        $data["temperature"] = $temp;
         $category_selected = $request->input('category');
         if($category_selected != null){
             if ($category_selected == "all"){

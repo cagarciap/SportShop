@@ -11,7 +11,10 @@
         <form method="POST" action="{{ route('client.filter.product') }}" class="form">
             @csrf
             <div class="form-row category-filter">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label>{{ __('Product.filter.temperature') }} {{ $data["temperature"] }} °C</label>
+                </div>
+                <div class="form-group col-md-4">
                     <select class="form-control" name="category">
                             <option value="all">{{ __('Product.filter.input') }}</option>
                         @foreach($data["categories"] as $category)
@@ -19,7 +22,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <button type="submit" class="btn btn-outline-success btn-block">{{ __('Product.filter.button') }}</button>
                 </div>
             </div>

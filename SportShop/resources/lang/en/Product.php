@@ -38,7 +38,8 @@ return [
     'cart' => 'Show cart',
     'filter' => [
         'input' => 'All', 
-        'button' => "Filter Products"
+        'button' => "Filter Products",
+        'temperature' => "Temperature:",
     ],
     'show_cart' => [
         'empty' => 'The shopping cart is empty',
