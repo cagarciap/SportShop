@@ -14,16 +14,16 @@
             </div>
         </div>
     @else
-        
+
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Show Description</th>
-                                <th colspan="2">Option</th>
+                                <th>{{ __('category.table.id') }}</th>
+                                <th>{{ __('category.table.name') }}</th>
+                                <th>{{ __('category.table.show') }}</th>
+                                <th colspan="2">{{ __('category.table.option') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,14 +33,14 @@
                                 <td>{{ $category->getName() }}</td>
                                 <td>{{ $category->getDescription() }}</td>
                                 <td><a class="navbar-brand btn btn-outline-info btn-block" href="{{ route('admin.category.show',['id'=> $category->getId()])}}"><img src="{{ asset('/icons/file-earmark-text.svg') }}" class="delete-icon"></a></td>
-                                <td><a class="navbar-brand btn btn-outline-danger btn-block" href="{{ route('admin.category.delete',['id'=> $category->getId()])}}" onclick="return confirm('Are you sure to delete this category?')"><img src="{{ asset('/icons/trash.svg') }}" class="delete-icon"></a></td>
+                                <td><a class="navbar-brand btn btn-outline-danger btn-block" href="{{ route('admin.category.delete',['id'=> $category->getId()])}}" onclick="return confirm('{{ __('category.holder.confirm') }}')"><img src="{{ asset('/icons/trash.svg') }}" class="delete-icon"></a></td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
-        
+
     @endif
 </div>
 @endsection

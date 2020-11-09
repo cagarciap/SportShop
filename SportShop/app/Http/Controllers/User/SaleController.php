@@ -52,12 +52,31 @@ class SaleController extends Controller
             foreach ($products as $product) {
                 $product->setQuantity($cart[$product->getId()]);
             }
-            $data["products"] = $products;  
+            $data["products"] = $products;
         }else{
             $data["products"] = null;
         }
         return view("user.product.show_cart")->with("data",$data);
-        
+
+    }
+
+    public function list(){
+        $user = Auth::user()->getId();
+        $sales = Sale::all()->where('user_id', $user);
+        $data = [];
+        $data["title"] = "Sales Record";
+        $data["sales"] = $sales;
+
+        //dd($data["sales"]);
+        return view('user.sale.list')->with("data",$data);
+    }
+
+    public function show($id)
+    {
+        $data = [];
+        $items = Item::all()->whereIn('sale_id',$id);
+        $data["items"] = $items;
+        return view('user.sale.show')->with("data",$data);
     }
 
     public function delete($id){

@@ -6,7 +6,7 @@
         <div class="col-md-8">
             @include('util.message')
             <div class="card">
-                <div class="card-header">Create Category</div>
+                <div class="card-header">{{ __('category.createCategory') }}</div>
                 <div class="card-body">
                 @if($errors->any())
                 <ul id="errors">
@@ -20,17 +20,17 @@
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Category Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Name" name="name" value="{{ old('name') }}" />
+                            <label>{{ __('category.label.categoryName') }}</label>
+                            <input type="text" class="form-control" placeholder="{{ __('category.holder.name') }}" name="name" value="{{ old('name') }}" />
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Description</label>
-                            <input type="text" class="form-control" placeholder="Enter Description" name="description" value="{{ old('description') }}" />
+                            <label>{{ __('category.label.description') }}</label>
+                            <input type="text" class="form-control" placeholder="{{ __('category.holder.description') }}" name="description" value="{{ old('description') }}" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <button type="submit" class="btn btn-outline-success btn-block">Add Category</button>
+                            <button type="submit" class="btn btn-outline-success btn-block">{{ __('category.label.add') }}</button>
                         </div>
                     </div>
                 </form>

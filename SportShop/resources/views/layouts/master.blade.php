@@ -92,6 +92,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <li class="nav-item" >
+                                    <a class="nav-link" href="{{ route('user.sale.list') }}">
+                                        Record
+                                    </a>
+                                </li>
                             @endif
                             <li class="nav-item">
                                     <a class="nav-link" href="{{ route('logout') }}"
