@@ -165,7 +165,9 @@ class SaleController extends Controller
             $billSession = session()->get("bill");
             $billSession[0] = $arrayBill;
             session()->put("bill",$billSession);
-
+            $billSessionId = session()->get("idBill");
+            $billSessionId[0] = $sale->getId();
+            session()->put("idBill",$billSessionId);
             return view("user.product.download")->with('success',$mess);
             //return redirect()->route('client.list')->with('success',$mess);
         }else{

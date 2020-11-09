@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\BillWay;
-use App\Util\EmailBill;
+use App\Util\ExcelBill;
 use App\Util\PdfBill;
 
 class BillServiceProvider extends ServiceProvider
@@ -19,9 +19,9 @@ class BillServiceProvider extends ServiceProvider
         $this->app->bind(BillWay::class, function ($app, $parameters){
             $bill = $parameters["arrayBill"];
             if ($bill == "excel"){
-                return new EmailBill($parameters);
+                return new ExcelBill($parameters);
             }else{
-                return new PdfBill();
+                return new PdfBill($parameters);
             }
         });
     }

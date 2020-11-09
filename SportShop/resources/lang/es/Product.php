@@ -38,7 +38,8 @@ return [
     'cart' => 'Ver Carrito de Compras',
     'filter' => [
         'input' => 'Todas las Categorias', 
-        'button' => "Filtrar Productos"
+        'button' => "Filtrar Productos",
+        'temperature' => "Temperatura:",
     ],
     'show_cart' => [
         'empty' => 'El carrito de compras está vacío',
