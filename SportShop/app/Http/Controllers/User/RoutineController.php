@@ -15,17 +15,6 @@ use Illuminate\Support\Arr;
 class RoutineController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            if(Auth::user()==null){
-                return redirect()->route('home.index');
-            }
-            return $next($request);
-        });
-    }
-
     public function menu()
     {
       return view('user.routine.menu');
@@ -34,7 +23,7 @@ class RoutineController extends Controller
     public function list()
     {
         $data = []; //to be sent to the view
-        $data["title"] = "List Routines";
+        $data["title"] = __('routine.title.list');
         $data["routines"] = Routine::all();
 
         return view('user.routine.list')->with("data",$data);
@@ -42,24 +31,28 @@ class RoutineController extends Controller
 
     public function myroutine()
     {
-        $data = []; //to be sent to the view
-        $data["title"] = "List Routines";
-        try{
-            $routinesuser = Auth::user()->routineusers;
-            $count = count($routinesuser);
-            if($count>0){
-            	$routineId = $routinesuser[$count-1]->getRoutineId();
-        		$routine = Routine::findOrFail($routineId);
-        		$data["routines"] = $routine;
-            }else{
-            	return redirect()->route('user.routine.recommend');
+        if(Auth::user()==null){
+            return view('auth.login');
+        }else{
+            $data = []; //to be sent to the view
+            $data["title"] = __('routine.title.list');
+            try{
+                $routinesuser = Auth::user()->routineusers;
+                $count = count($routinesuser);
+                if($count>0){
+                    $routineId = $routinesuser[$count-1]->getRoutineId();
+                    $routine = Routine::findOrFail($routineId);
+                    $data["routines"] = $routine;
+                }else{
+                    return redirect()->route('user.routine.recommend');
+                }
+                
+            }catch(ModelNotFoundException $e){
+                return redirect()->route('home.index');
             }
-            
-        }catch(ModelNotFoundException $e){
-            return redirect()->route('home.index');
-        }
 
-        return view('user.routine.myroutine')->with("data",$data);
+            return view('user.routine.myroutine')->with("data",$data);
+        }
     }
 
     public function show($id)
@@ -113,23 +106,27 @@ class RoutineController extends Controller
 
         if($routine != null)
         {
-        	$data['bmiRoutine'] = $routine;
-        	$userId = Auth::user()->getId();
-        	$routineusers = Routineuser::where('user_id', $userId)->first();
-        	
-        	if($routineusers != null){
-        		if($routineusers->getRoutineId() != $routine->getId()){
-           	 		$routineusers->setRoutineId($routine->getId());
-           	 		$routineusers->save();
-            	}
+            $data['bmiRoutine'] = $routine;
+            if(Auth::user()==null){
+                return view('user.routine.calculate')->with("data",$data);
             }else{
-                $routineuser = new Routineuser();
-            	$routineuser->setUserId(Auth::user()->getId());
-            	$routineuser->setRoutineId($routine->getId());
-            	$routineuser->save();
+                $userId = Auth::user()->getId();
+                $routineusers = Routineuser::where('user_id', $userId)->first();
+                
+                if($routineusers != null){
+                    if($routineusers->getRoutineId() != $routine->getId()){
+                        $routineusers->setRoutineId($routine->getId());
+                        $routineusers->save();
+                    }
+                }else{
+                    $routineuser = new Routineuser();
+                    $routineuser->setUserId(Auth::user()->getId());
+                    $routineuser->setRoutineId($routine->getId());
+                    $routineuser->save();
+                }
+                
+                return view('user.routine.calculate')->with("data",$data);
             }
-            
-            return view('user.routine.calculate')->with("data",$data);
         }else{
         	 return view('user.routine.notFounded');
         }

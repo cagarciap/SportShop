@@ -27,8 +27,9 @@ return [
 
     'title' => [
         'create' => 'Crear Categoria',
-        'List' => 'Lista de Categorias',
-        'controller' => 'Controlador de Categoria'
+        'list' => 'Lista de Categorias',
+        'controller' => 'Controlador de Categoria',
+        'control' => 'Control de Categoria'
     ],
 
     'label' => [

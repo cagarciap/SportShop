@@ -133,10 +133,10 @@
                             <a class="navbar-brand" href="{{ route('admin.product.menu') }}">{{ __('Product.menu.title') }}</a>
                         </ul>
                         <ul class="navbar-nav mr-auto">
-                            <a class="navbar-brand" href="{{ route('admin.category.menu') }}">Category Control</a>
+                            <a class="navbar-brand" href="{{ route('admin.category.menu') }}">{{ __('category.title.control') }}</a>
                         </ul>
                         <ul class="navbar-nav mr-auto">
-                            <a class="navbar-brand" href="{{ route('admin.routine.menu') }}">Admin Routines Control</a>
+                            <a class="navbar-brand" href="{{ route('admin.routine.menu') }}">{{ __('routine.title.adminControl') }}</a>
                         </ul>
                         <ul class="navbar-nav mr-auto">
                             <a class="navbar-brand" href="{{ route('admin.sale.menu') }}">{{ __('Sale.titleController') }}</a>
@@ -148,7 +148,10 @@
                                 <a class="navbar-brand" href="{{ route('client.list') }}">{{ __('Product.title_list') }}</a>
                             </ul>
                             <ul class="navbar-nav mr-auto">
-                                <a class="navbar-brand" href="{{ route('user.routine.menu') }}">Exercise Routine Suggestion</a>
+                                <a class="navbar-brand" href="{{ route('user.routine.menu') }}">{{ __('routine.suggestion') }}</a>
+                            </ul>
+                            <ul class="navbar-nav mr-auto">
+                                <a class="navbar-brand" href="{{ route('user.ally.menu') }}">{{ __('ally.products') }}</a>
                             </ul>
                         @endif
                     @else
@@ -156,7 +159,10 @@
                             <a class="navbar-brand" href="{{ route('client.list') }}">{{ __('Product.title_list') }}</a>
                         </ul>
                         <ul class="navbar-nav mr-auto">
-                            <a class="navbar-brand" href="{{ route('user.routine.menu') }}">Exercise Routine Suggestion</a>
+                            <a class="navbar-brand" href="{{ route('user.routine.menu') }}">{{ __('routine.suggestion') }}</a>
+                        </ul>
+                        <ul class="navbar-nav mr-auto">
+                            <a class="navbar-brand" href="{{ route('user.ally.menu') }}">{{ __('ally.products') }}</a>
                         </ul>
                     @endif
 

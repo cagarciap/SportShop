@@ -6,9 +6,9 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Don't have any Routines</div>
+                    <div class="card-header">{{ __('routine.noRoutines') }}</div>
                     <div class="card-body">
-                        <a href="{{ route('client.list') }}" class="btn btn-outline-success btn-block">Product List</a>
+                        <a href="{{ route('client.list') }}" class="btn btn-outline-success btn-block">{{ __('routine.title.list') }}</a>
                     </div>
                 </div>
             </div>
@@ -19,10 +19,10 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                          <th>Id</th>
-                          <th>Name</th>
-                          <th>Show Description</th>
-                          <th colspan="2">Option</th>
+                          <th>{{ __('routine.table.id') }}</th>
+                          <th>{{ __('routine.table.name') }}</th>
+                          <th>{{ __('routine.table.show') }}</th>
+                          <th colspan="2">{{ __('routine.table.option') }}</th>
                         </tr>
                     </thead>
                     <tbody>

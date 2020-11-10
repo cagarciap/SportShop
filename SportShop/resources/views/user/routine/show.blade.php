@@ -6,13 +6,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                	Routine Detail
+                	{{ __('routine.detail') }}
                 </div>
                 <div class="card-body">
-                	<b>Name:</b> {{ $data["routine"]->getName() }}<br />
-                    <b>Description:</b> {{ $data["routine"]->getDescription() }}<br />
-                    <b>The minimum body mass for this routine is:</b> {{ $data["routine"]->getMinMasa() }}<br />
-                    <b>The maximum body mass for this routine is:</b> {{ $data["routine"]->getMaxMasa() }}<br />
+                	<b>{{ __('routine.info.name') }}</b> {{ $data["routine"]->getName() }}<br />
+                    <b>{{ __('routine.info.description') }}</b> {{ $data["routine"]->getDescription() }}<br />
+                    <b>{{ __('routine.info.minimumBMI') }}</b> {{ $data["routine"]->getMinMasa() }}<br />
+                    <b>{{ __('routine.info.maximumBMI') }}</b> {{ $data["routine"]->getMaxMasa() }}<br />
                 </div>
             </div>
         </div>

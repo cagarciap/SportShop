@@ -6,12 +6,12 @@
 <div class="d-flex" id="wrapper">
     <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">
-            User Routine Control
+            {{ __('routine.title.userControl') }}
         </div>
         <div class="list-group list-group-flush">
-            <a href="{{ route('user.routine.recommend') }}" class="list-group-item list-group-item-action bg-light">Routine recommended</a>
-            <a href="{{ route('user.routine.list') }}" class="list-group-item list-group-item-action bg-light">Routine List</a>
-            <a href="{{ route('user.routine.myroutine') }}" class="list-group-item list-group-item-action bg-light">My Routine</a>
+            <a href="{{ route('user.routine.recommend') }}" class="list-group-item list-group-item-action bg-light">{{ __('routine.info.recommend') }}</a>
+            <a href="{{ route('user.routine.list') }}" class="list-group-item list-group-item-action bg-light">{{ __('routine.title.list') }}</a>
+            <a href="{{ route('user.routine.myroutine') }}" class="list-group-item list-group-item-action bg-light">{{ __('routine.info.myRoutine') }}</a>
         </div>
     </div>
     <div id="page-content-wrapper">
