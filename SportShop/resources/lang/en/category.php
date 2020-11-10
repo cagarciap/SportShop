@@ -28,7 +28,8 @@ return [
     'title' => [
         'create' => 'Create Category',
         'list' => 'Category List',
-        'controller' => 'Category Controller'
+        'controller' => 'Category Controller',
+        'control' => 'Category Control'
     ],
 
     'label' => [

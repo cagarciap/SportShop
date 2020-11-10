@@ -6,17 +6,17 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                	Calculated data
+                {{ __('routine.info.calculated') }}
                     <a class="btn btn-outline-info return-btn" href="{{ route('user.routine.recommend') }}"><img src="{{ asset('/icons/arrow-return-left.svg') }}" class="delete-icon"></a>
                 </div>
                 <div class="card-body"> 
-                    <b>Your Body Mass Index is:</b> {{ $data['bodyMI'] }}<br />
-                    <b>Your body state is:</b> {{ $data['stateBody'] }}<br />
+                    <b>{{ __('routine.info.bodyMI') }}</b> {{ $data['bodyMI'] }}<br />
+                    <b>{{ __('routine.info.bodyState') }}</b> {{ $data['stateBody'] }}<br />
                     <table class="table table-striped">
             		  <thead>
                     	<tr>
-                  			<th>Recommended Routine</th>
-                  			<th>Show</th>
+                  			<th>{{ __('routine.info.recommend') }}</th>
+                  			<th>{{ __('routine.table.show') }}</th>
                			</tr>
                		  </thead>
                		  <tbody>

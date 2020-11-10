@@ -7,10 +7,10 @@
          <table class="table table-striped">
             <thead>
                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Show Description</th>
-                  <th colspan="2">Option</th>
+                  <th>{{ __('routine.table.id') }}</th>
+                  <th>{{ __('routine.table.name') }}</th>
+                  <th>{{ __('routine.table.show') }}</th>
+                  <th colspan="2">{{ __('routine.table.option') }}</th>                  
                </tr>
             </thead>
             <tbody>

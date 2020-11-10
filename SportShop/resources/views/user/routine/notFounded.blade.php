@@ -5,12 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Error</div>
+                <div class="card-header">{{ __('routine.info.error') }}</div>
 
                 <div class="card-body">
-                	<b>There is no routine for your BMI, try again<br />
+                	<b>{{ __('routine.info.notFounded') }}<br />
                 	<div class="option-button">
-                        <a class="btn btn-outline-success btn-block" href="{{ route('user.routine.recommend') }}">Recommend Again</a>
+                        <a class="btn btn-outline-success btn-block" href="{{ route('user.routine.recommend') }}">{{ __('routine.holder.recommendAgain') }}</a>
                     </div> 
                 </div>
             </div>

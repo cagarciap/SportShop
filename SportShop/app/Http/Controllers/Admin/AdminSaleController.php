@@ -20,9 +20,6 @@ class AdminSaleController extends Controller
 
     public function __construct()
     {
-        $this->routes = [
-            ["route" => "admin.sale.list", "title" => __('Sale.title')],
-        ];
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             if(Auth::user()->getRole()=="client"){
@@ -32,20 +29,26 @@ class AdminSaleController extends Controller
             return $next($request);
         });
     }
+    
+    public function routes(){
+        return [
+            ["route" => "admin.sale.list", "title" => __('Sale.title')],
+        ];
+    }
 
     public function list()
     {
         $data = [];
         $data["title"] = __('Sale.title');
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Sale.titleController');
         return view("admin.sale.dateForm")->with("data",$data);
     }
 
     public function menu()
     {
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Sale.titleController');
         return view('admin.menu')->with("data",$data);
     }
 
@@ -53,20 +56,24 @@ class AdminSaleController extends Controller
     {
         $startDate=$request->input('startDate');
         $endDate=$request->input('endDate');
+        $datesQuery = session()->get("datesQuery");
+        $datesQuery[0] = $startDate;
+        $datesQuery[1] = $endDate;
+        session()->put("datesQuery",$datesQuery);
         $data = [];
         $data["title"] = __('Sale.title');
         $sales = Sale::all()->where('date','>=',$startDate)->where('date','<=',$endDate);
         $data["sales"] = $sales;
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Sale.titleController');
         return view("admin.sale.list")->with("data",$data);
     }
 
     public function show($id)
     {
         $data = [];
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('Sale.titleController');
         $items = Item::all()->whereIn('sale_id',$id);
         $data["items"] = $items;
         return view('admin.sale.show')->with("data",$data);

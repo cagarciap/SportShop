@@ -75,6 +75,10 @@ Route::get('/user/routine/list', 'User\RoutineController@list')->name("user.rout
 Route::get('/user/routine/show/{id}', 'User\RoutineController@show')->name("user.routine.show");
 Route::get('/user/routine/myroutine', 'User\RoutineController@myroutine')->name("user.routine.myroutine");
 
+//Allies Products
+Route::get('/user/ally', 'User\AllyController@menu')->name("user.ally.menu");
+Route::get('/user/ally/list', 'User\AllyController@list')->name("user.ally.list");
+
 // Lang
 Route::get('lang/{lang}','LanguageController@switchLang')->name('lang.switch');
 

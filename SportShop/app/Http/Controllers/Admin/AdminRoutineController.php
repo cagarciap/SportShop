@@ -17,10 +17,6 @@ class AdminRoutineController extends Controller
 
     public function __construct()
     {
-        $this->routes = [
-            ["route" => "admin.routine.create", "title" => "Create Routine"],
-            ["route" => "admin.routine.list", "title" => "List Routine"]
-        ];
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
             if(Auth::user()->getRole()=="client"){
@@ -30,12 +26,19 @@ class AdminRoutineController extends Controller
             return $next($request);
         });
     }
+    
+    public function routes(){
+        return [
+            ["route" => "admin.routine.create", "title" => __('routine.title.create')],
+            ["route" => "admin.routine.list", "title" => __('routine.title.list')]
+        ];
+    }
 
     public function menu()
     {
       $data = [];
-      $data["routes"] = $this->routes;
-      $data["nameMenu"] = $this->nameMenu;
+      $data["routes"] = $this->routes();
+      $data["nameMenu"] = __('routine.title.controller');
       return view('admin.menu')->with("data",$data);
     }
 
@@ -43,8 +46,8 @@ class AdminRoutineController extends Controller
     {
       $data = []; //to be sent to the view
       $data["title"] = "Create Routine";
-      $data["routes"] = $this->routes;
-      $data["nameMenu"] = $this->nameMenu;
+      $data["routes"] = $this->routes();
+      $data["nameMenu"] = __('routine.title.controller');
       return view('admin.routine.create')->with("data",$data);
     }
 
@@ -52,8 +55,8 @@ class AdminRoutineController extends Controller
     {
         $data = []; //to be sent to the view
         $data["title"] = "List Routines";
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('routine.title.controller');
         $data["routines"] = Routine::all();
 
         return view('admin.routine.list')->with("data",$data);
@@ -77,8 +80,8 @@ class AdminRoutineController extends Controller
         }
         $data = [];
         $data["routine"] = $routine;
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('routine.title.controller');
         return view('admin.routine.show')->with("data",$data);
     }
 
@@ -92,8 +95,8 @@ class AdminRoutineController extends Controller
         $data = [];
         $data["title"] = $routine->getName();
         $data["routine"] = $routine;
-        $data["routes"] = $this->routes;
-        $data["nameMenu"] = $this->nameMenu;
+        $data["routes"] = $this->routes();
+        $data["nameMenu"] = __('routine.title.controller');
         return view('admin.routine.update')->with("data",$data);
     }
     

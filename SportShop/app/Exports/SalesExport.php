@@ -24,8 +24,10 @@ class SalesExport implements FromCollection,WithHeadings
     }
     public function collection()
     {
-         $sales = Sale::all();
-         return $sales;
-        
+         $datesQuery = session()->get("datesQuery");
+         $startDate = $datesQuery[0];
+         $endDate = $datesQuery[1];
+         $sales = Sale::all()->where('date','>=',$startDate)->where('date','<=',$endDate);
+         return $sales;   
     }
 }
