@@ -117,6 +117,7 @@ class AdminProductController extends Controller
         $product->setQuantity($request->input('quantity'));
         $product->setPrice($request->input('price'));
         $product->setSize($request->input('size'));
+        $product->setCategoryId($request->input('category'));
         $old_image_name = $request->input('image_name');
 
         if($request->hasFile('image')){
