@@ -22,7 +22,7 @@ class AllyController extends Controller
 
     public function list()
     { 
-        $json_call = Http::get('http://ec2-3-86-109-59.compute-1.amazonaws.com/public/api/videogames');
+        $json_call = Http::get('http://xpn-games.tk/public/api/videogames');
         $videogames = $json_call->json();
         $datos = $videogames["data"];
         $productos = [];
